@@ -1,0 +1,2 @@
+import './zoomComponent';
+import './zoomPlugin';
