@@ -1,6 +1,37 @@
 {
-  "name": "videojs-zoom-duck",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+	"name": "videojs-zoom-duck",
+	"title": "Video.js Zoom",
+	"version": "1.0.0",
+	"private": false,
+	"description": "",
+	"author": "Giovane Santos <giovanesantos1999@gmail.com>",
+	"license": "MIT",
+	"main": "index.js",
+	"scripts": {},
+	"engines": {
+		"node": ">=16.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/theonlyducks/videojs-zoom-duck.git"
+	},
+	"bugs": {
+		"url": "https://github.com/theonlyducks/videojs-zoom-duck/issues"
+	},
+	"files": [],
+	"keywords": [
+		"videojs",
+		"videojs-zoom-duck",
+		"videojs-plugin",
+		"videojs-plugin-zoom"
+	],
+	"browserslist": [
+		"defaults"
+	],
+	"peerDependencies": {
+		"video.js": ">= ^7"
+	},
+	"devDependencies": {
+		"video.js": "^7.20.3"
+	}
 }
