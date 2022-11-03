@@ -13,11 +13,12 @@ class ZoomPlugin extends Plugin {
 
 	constructor(player, options) {
 		super(player, options);
-		videojs.log('zoom plugin start ', options);
+		videojs.log('Zoom plugin start ', options);
 		this.player = player.el();
 		this.player.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(ZoomPlugin.defaultOptions, options);
 		player.getChild('ControlBar').addChild('ZoomButton');
+		player.addChild('ZoomModal', { plugin: this });
 		player.on('playing', () => {
 			videojs.log('playback began!');
 		});

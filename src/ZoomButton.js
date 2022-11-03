@@ -8,9 +8,14 @@ class ZoomButton extends Button {
 		super(player, options);
 	}
 
-	handleClick() {
-		videojs.log('handleClick')
+	buildCSSClass() {
+		return `vjs-zoom-duck ${super.buildCSSClass()}`;
 	}
+
+	handleClick() {
+		videojs.log('Zoom button handleClick');
+		this.player().getChild('ZoomModal').open();
+	};
 
 }
 

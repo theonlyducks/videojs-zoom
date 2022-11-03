@@ -1,0 +1,23 @@
+.video-js .vjs-zoom-duck {
+	font-family: 'VideoJS', serif;
+	cursor: pointer;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.video-js .vjs-zoom-duck .vjs-icon-placeholder:before {
+	content: "\f110";
+}
+
+.video-js .vjs-zoom-duck__container {
+	right: 0;
+	bottom: 30px;
+	padding: 10px;
+	position: absolute;
+	display: none;
+}
+
+.video-js .vjs-zoom-duck__container.open {
+	display: flex;
+	flex-direction: column;
+}
