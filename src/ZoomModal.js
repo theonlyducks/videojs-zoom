@@ -34,10 +34,12 @@ class ZoomModal extends Component {
 		const zoomIn = document.getElementById('vjs-zoom-duck__zoomIn');
 		const zoomOut = document.getElementById('vjs-zoom-duck__zoomOut');
 		zoomIn.onclick = () => {
+			if (this.state.zoom > 8) return;
 			this.state.zoom++;
 			this.options.plugin.zoom(this.state.zoom);
 		}
 		zoomOut.onclick = () => {
+			if (this.state.zoom < 1) return;
 			this.state.zoom--;
 			this.options.plugin.zoom(this.state.zoom);
 		}

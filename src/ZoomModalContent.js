@@ -1,3 +1,5 @@
+
+
 export default class ZoomModalContent {
 
 	constructor() {
@@ -12,13 +14,13 @@ export default class ZoomModalContent {
 	#createContent() {
 		this.content = `
 			<div class="vjs-zoom-duck__container--row">
-				<button id="vjs-zoom-duck__zoomIn">
+				<button id="vjs-zoom-duck__zoomIn" class="vjs-zoom-duck__button">
 					<span> + </span>
 				</button>
 				<button>
 					<span> </span>
 				</button>
-				<button id="vjs-zoom-duck__zoomOut">
+				<button id="vjs-zoom-duck__zoomOut" class="vjs-zoom-duck__button">
 					<span> - </span>
 				</button>
 			</div>

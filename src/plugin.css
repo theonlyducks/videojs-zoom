@@ -15,9 +15,17 @@
 	padding: 10px;
 	position: absolute;
 	display: none;
+	background-color: rgba(43, 51, 63, .7);
 }
 
 .video-js .vjs-zoom-duck__container.open {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+}
+
+.video-js .vjs-zoom-duck__button {
+	cursor: pointer;
+	border: none;
+	padding: 10px;
 }
