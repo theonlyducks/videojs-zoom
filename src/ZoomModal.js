@@ -31,18 +31,16 @@ class ZoomModal extends Component {
 	}
 
 	#listeners() {
-		const zoomIn = document.getElementById('vjs-zoom-duck__zoomIn');
-		const zoomOut = document.getElementById('vjs-zoom-duck__zoomOut');
-		zoomIn.onclick = () => {
-			if (this.state.zoom > 8) return;
-			this.state.zoom++;
-			this.options.plugin.zoom(this.state.zoom);
-		}
-		zoomOut.onclick = () => {
-			if (this.state.zoom < 1) return;
-			this.state.zoom--;
-			this.options.plugin.zoom(this.state.zoom);
-		}
+		let buttons = document.getElementsByClassName('vjs-zoom-duck__button');
+		buttons = Array.from(buttons);
+		buttons.map(button => {
+			const [ _, action ] = button.id.split('__');
+			button.onclick = () => this.#functions(action);
+		})
+	}
+
+	#functions(action) {
+		console.log(action);
 	}
 
 	open() {

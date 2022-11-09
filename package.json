@@ -3,7 +3,7 @@
 	"title": "Video.js Zoom",
 	"version": "1.0.0",
 	"private": false,
-	"description": "",
+	"description": "Simple plugin to zoom in video.js player",
 	"author": "Giovane Santos <giovanesantos1999@gmail.com>",
 	"license": "MIT",
 	"main": "index.js",
