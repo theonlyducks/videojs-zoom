@@ -2,22 +2,18 @@ import videojs from "video.js";
 
 const Component = videojs.getComponent('Component');
 
+import ZoomFunction from "./ZoomFunction";
 import ZoomModalContent from "./ZoomModalContent";
 
 class ZoomModal extends Component {
 
 	constructor(player, options) {
 		super(player, options);
-		this.state = {
-			zoom: 1
-		}
 		this.player = player;
 		this.options = options;
-		console.log(this.options);
-		videojs.log("Zoom overlay");
+		this.function = new ZoomFunction(player, options);
 		player.on('playing', () => {
-			videojs.log('playback began!');
-			this.#listeners();
+			this.listeners();
 		});
 	}
 
@@ -30,17 +26,13 @@ class ZoomModal extends Component {
 		return modal;
 	}
 
-	#listeners() {
+	listeners() {
 		let buttons = document.getElementsByClassName('vjs-zoom-duck__button');
 		buttons = Array.from(buttons);
 		buttons.map(button => {
 			const [ _, action ] = button.id.split('__');
-			button.onclick = () => this.#functions(action);
-		})
-	}
-
-	#functions(action) {
-		console.log(action);
+			button.onclick = () => this.function[action]();
+		});
 	}
 
 	open() {

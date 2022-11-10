@@ -11,22 +11,19 @@ class ZoomPlugin extends Plugin {
 		rotate: 0
 	};
 
-	constructor(player, options) {
+	constructor(player, options = {}) {
 		super(player, options);
-		videojs.log('Zoom plugin start ', options);
 		this.player = player.el();
 		this.player.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(ZoomPlugin.defaultOptions, options);
+		videojs.log('zoom plugin start ', options);
 		player.getChild('ControlBar').addChild('ZoomButton');
 		player.addChild('ZoomModal', { plugin: this });
-		player.on('playing', () => {
-			videojs.log('playback began!');
-		});
 	}
 
 	zoom(value) {
 		if (value <= 0) {
-			throw new Error('');
+			throw new Error('Zoom value invalid');
 		}
 		this.state.zoom = value;
 		this.#setTransform();
@@ -40,11 +37,6 @@ class ZoomPlugin extends Plugin {
 	move(x, y) {
 		this.state.moveX = x;
 		this.state.moveY = y;
-		this.#setTransform();
-	}
-
-	reset() {
-		this.state = ZoomPlugin.defaultOptions;
 		this.#setTransform();
 	}
 

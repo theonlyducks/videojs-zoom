@@ -14,7 +14,8 @@ class ZoomButton extends Button {
 
 	handleClick() {
 		videojs.log('Zoom button handleClick');
-		this.player().getChild('ZoomModal').open();
+		const modal = this.player().getChild('ZoomModal');
+		modal.open();
 	};
 
 }
