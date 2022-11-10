@@ -14,6 +14,7 @@ class ZoomPlugin extends Plugin {
 	constructor(player, options = {}) {
 		super(player, options);
 		this.player = player.el();
+		this.callback = () => {};
 		this.player.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(ZoomPlugin.defaultOptions, options);
 		videojs.log('zoom plugin start ', options);
@@ -38,6 +39,10 @@ class ZoomPlugin extends Plugin {
 		this.state.moveX = x;
 		this.state.moveY = y;
 		this.#setTransform();
+	}
+
+	onchange(callback) {
+		this.callback = callback;
 	}
 
 	#setTransform() {
