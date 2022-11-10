@@ -69,11 +69,17 @@ export default class ZoomFunction {
 	}
 
 	moveLeft() {
-
+		if ((this.state.moveCount * this.state.saltMoveX) >= (this.state.moveX + this.state.saltMoveX)) {
+			this.state.moveX += this.state.saltMoveX;
+			this.options.plugin.move(this.state.moveX, this.state.moveY);
+		}
 	}
 
 	moveRight() {
-
+		if (-(this.state.moveCount * this.state.saltMoveX) <= (this.state.moveX - this.state.saltMoveX)) {
+			this.state.moveX -= this.state.saltMoveX;
+			this.options.plugin.move(this.state.moveX, this.state.moveY);
+		}
 	}
 
 	rotateLeft() {

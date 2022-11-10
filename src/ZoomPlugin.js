@@ -43,9 +43,9 @@ class ZoomPlugin extends Plugin {
 	#setTransform() {
 		const [ video ] = this.player.getElementsByTagName('video');
 		video.style.transform = `
+			translate(${this.state.moveX}px, ${this.state.moveY}px) 
 			scale(${this.state.zoom}) 
 			rotate(${this.state.rotate}deg)
-			translate(${this.state.moveX}px, ${this.state.moveY}px) 
 		`;
 	}
 
