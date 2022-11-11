@@ -1,49 +1,64 @@
 {
-	"name": "videojs-zoom-duck",
-	"title": "Video.js Zoom",
-	"version": "1.0.0",
-	"private": false,
-	"description": "Simple plugin to zoom in video.js player",
-	"author": "Giovane Santos <giovanesantos1999@gmail.com>",
-	"license": "MIT",
-	"main": "index.js",
-	"scripts": {
-		"start": "webpack serve --progress"
-	},
-	"engines": {
-		"node": ">=16.0"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/theonlyducks/videojs-zoom-duck.git"
-	},
-	"bugs": {
-		"url": "https://github.com/theonlyducks/videojs-zoom-duck/issues"
-	},
-	"files": [],
-	"keywords": [
-		"videojs",
-		"videojs-zoom-duck",
-		"videojs-plugin",
-		"videojs-plugin-zoom"
-	],
-	"browserslist": [
-		"defaults"
-	],
-	"peerDependencies": {
-		"video.js": ">= ^7"
-	},
-	"devDependencies": {
-		"@babel/cli": "^7.19.3",
-		"@babel/core": "^7.19.6",
-		"@babel/preset-env": "^7.19.4",
-		"babel-loader": "^9.0.1",
-		"css-loader": "^6.7.1",
-		"html-webpack-plugin": "^5.5.0",
-		"style-loader": "^3.3.1",
-		"video.js": "^7.20.3",
-		"webpack": "^5.74.0",
-		"webpack-cli": "^4.10.0",
-		"webpack-dev-server": "^4.11.1"
-	}
+    "name": "@theonlyducks/videojs-zoom",
+    "title": "Video.js Zoom",
+    "version": "1.0.0",
+    "private": false,
+    "description": "Simple plugin to zoom in video.js player",
+    "author": "Giovane Santos <giovanesantos1999@gmail.com>",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "lint": "vjsstandard",
+        "start": "webpack serve --progress"
+    },
+    "engines": {
+        "node": ">=16.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/theonlyducks/videojs-zoom-duck.git"
+    },
+    "bugs": {
+        "url": "https://github.com/theonlyducks/videojs-zoom-duck/issues"
+    },
+    "vjsstandard": {
+        "ignore": [
+            "dist",
+            "docs"
+        ]
+    },
+    "videojs-plugin": {
+        "style": "",
+        "script": ""
+    },
+    "files": [
+        "README.md",
+        "dist"
+    ],
+    "keywords": [
+        "videojs",
+        "videojs-zoom-duck",
+        "videojs-plugin",
+        "videojs-plugin-zoom"
+    ],
+    "browserslist": [
+        "defaults"
+    ],
+    "peerDependencies": {
+        "video.js": ">= ^7"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.19.3",
+        "@babel/core": "^7.19.6",
+        "@babel/preset-env": "^7.19.4",
+        "babel-loader": "^9.0.1",
+        "css-loader": "^6.7.1",
+        "html-webpack-plugin": "^5.5.0",
+        "style-loader": "^3.3.1",
+        "video.js": "^7.20.3",
+        "videojs-standard": "^9.0.1",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.11.1"
+    }
 }
