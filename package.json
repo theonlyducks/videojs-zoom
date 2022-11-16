@@ -8,7 +8,7 @@
     "license": "MIT",
     "main": "index.js",
     "scripts": {
-        "lint": "vjsstandard",
+        "lint": "vjsstandard src/**/*.js",
         "start": "webpack serve --progress"
     },
     "engines": {

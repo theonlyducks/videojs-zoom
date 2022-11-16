@@ -1,70 +1,70 @@
 @font-face {
-    font-family: "Material Icons";
-    font-style: normal;
-    font-weight: 400;
-    font-display: block;
-    src: url("./assets/material-icons.woff2") format("woff2"),
-    url("./assets/material-icons.woff") format("woff");
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("./assets/material-icons.woff2") format("woff2"),
+  url("./assets/material-icons.woff") format("woff");
 }
 
 .video-js .icons {
-    font-family: "Material Icons", sans-serif;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 22px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "liga";
+  font-family: "Material Icons", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga";
 }
 
 .video-js .vjs-zoom-duck {
-    font-family: 'VideoJS', serif;
-    cursor: pointer;
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'VideoJS', serif;
+  cursor: pointer;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .video-js .vjs-zoom-duck .vjs-icon-placeholder:before {
-    content: "\f110";
+  content: "\f110";
 }
 
 .video-js .vjs-zoom-duck__container {
-    right: 0;
-    bottom: 30px;
-    padding: 10px;
-    display: none;
-    position: absolute;
-    background-color: rgba(43, 51, 63, .7);
+  right: 0;
+  bottom: 30px;
+  padding: 10px;
+  display: none;
+  position: absolute;
+  background-color: rgba(43, 51, 63, .7);
 }
 
 .video-js .vjs-zoom-duck__container.open {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .video-js .vjs-zoom-duck__space {
-    width: 22px;
-    height: 22px;
-    display: inline-block;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
 }
 
 .video-js .vjs-zoom-duck__button {
-    cursor: pointer;
-    border: none;
-    width: 22px;
-    height: 22px;
-    border-radius: 100%;
+  cursor: pointer;
+  border: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
 }
 
 .video-js .vjs-zoom-duck__button:hover {
-    color: rgba(43, 51, 63, .7);
-    background-color: white;
+  color: rgba(43, 51, 63, .7);
+  background-color: white;
 }

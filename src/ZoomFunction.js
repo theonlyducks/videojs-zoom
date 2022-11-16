@@ -1,107 +1,127 @@
+const ZOOM_SALT = 0.2;
+
 export default class ZoomFunction {
 
-    static ZOOM_SALT = .2;
+  constructor(player, options) {
+    this.state = {
+      zoom: 1,
+      rotate: 0,
+      moveX: 0,
+      moveY: 0,
+      moveCount: 0,
+      saltMoveX: 70,
+      saltMoveY: 70
+    };
+    this.player = player.el();
+    this.options = options;
+    player.on('playing', () => {
+      this._updateSalt();
+    });
+  }
 
-    constructor(player, options) {
-        this.state = {
-            zoom: 1,
-            rotate: 0,
-            moveX: 0,
-            moveY: 0,
-            moveCount: 0,
-            saltMoveX: 70,
-            saltMoveY: 70
-        }
-        this.player = player.el();
-        this.options = options;
-        player.on('playing', () => {
-            this.#updateSalt();
-        });
-    }
+  _updateSalt() {
+    this.state.saltMoveX = (this.player.offsetWidth * ZOOM_SALT) / 2;
+    this.state.saltMoveY = (this.player.offsetHeight * ZOOM_SALT) / 2;
+  }
 
-    #updateSalt() {
-        this.state.saltMoveX = (this.player.offsetWidth * ZoomFunction.ZOOM_SALT) / 2;
-        this.state.saltMoveY = (this.player.offsetHeight * ZoomFunction.ZOOM_SALT) / 2;
+  zoomIn() {
+    if (this.state.zoom >= 9.8) {
+      return;
     }
+    this.state.moveCount++;
+    this.state.zoom += ZOOM_SALT;
+    this.options.plugin.zoom(this.state.zoom);
+    this.options.plugin.callback(this.state);
+  }
 
-    zoomIn() {
-        if (this.state.zoom >= 9.8) return;
-        this.state.moveCount++;
-        this.state.zoom += ZoomFunction.ZOOM_SALT;
-        this.options.plugin.zoom(this.state.zoom);
-        this.options.plugin.callback(this.state);
+  zoomOut() {
+    if (this.state.zoom <= 1) {
+      return;
     }
+    this.state.moveCount--;
+    this.state.zoom -= ZOOM_SALT;
+    this.options.plugin.zoom(this.state.zoom);
+    this.options.plugin.move(0, 0);
+    this.options.plugin.callback(this.state);
+  }
 
-    zoomOut() {
-        if (this.state.zoom <= 1) return;
-        this.state.moveCount--;
-        this.state.zoom -= ZoomFunction.ZOOM_SALT;
-        this.options.plugin.zoom(this.state.zoom);
-        this.options.plugin.move(0, 0);
-        this.options.plugin.callback(this.state);
-    }
+  moveUp() {
+    const next = this.state.moveY + this.state.saltMoveY;
 
-    moveUp() {
-        const next = this.state.moveY + this.state.saltMoveY;
-        const available = this.state.moveCount * this.state.saltMoveY;
-        if (available < next) return;
-        this.#updateSalt();
-        this.state.moveY += this.state.saltMoveY;
-        this.options.plugin.move(this.state.moveX, this.state.moveY);
-        this.options.plugin.callback(this.state);
-    }
+    const available = this.state.moveCount * this.state.saltMoveY;
 
-    moveDown() {
-        const next = this.state.moveY - this.state.saltMoveY;
-        const available = this.state.moveCount * this.state.saltMoveY;
-        if (-available > next) return;
-        this.#updateSalt();
-        this.state.moveY -= this.state.saltMoveY;
-        this.options.plugin.move(this.state.moveX, this.state.moveY);
-        this.options.plugin.callback(this.state);
+    if (available < next) {
+      return;
     }
+    this._updateSalt();
+    this.state.moveY += this.state.saltMoveY;
+    this.options.plugin.move(this.state.moveX, this.state.moveY);
+    this.options.plugin.callback(this.state);
+  }
 
-    reset() {
-        this.state.zoom = 1;
-        this.state.moveX = 0;
-        this.state.moveY = 0;
-        this.state.rotate = 0;
-        this.state.moveCount = 0;
-        this.options.plugin.zoom(1);
-        this.options.plugin.rotate(0);
-        this.options.plugin.move(0, 0);
-        this.options.plugin.callback(this.state);
-    }
+  moveDown() {
+    const next = this.state.moveY - this.state.saltMoveY;
 
-    moveLeft() {
-        const next = this.state.moveX + this.state.saltMoveX;
-        const available = this.state.moveCount * this.state.saltMoveX;
-        if (available < next) return;
-        this.#updateSalt();
-        this.state.moveX += this.state.saltMoveX;
-        this.options.plugin.move(this.state.moveX, this.state.moveY);
-        this.options.plugin.callback(this.state);
-    }
+    const available = this.state.moveCount * this.state.saltMoveY;
 
-    moveRight() {
-        const next = this.state.moveX - this.state.saltMoveX;
-        const available = this.state.moveCount * this.state.saltMoveX;
-        if (-available > next) return;
-        this.#updateSalt();
-        this.state.moveX -= this.state.saltMoveX;
-        this.options.plugin.move(this.state.moveX, this.state.moveY);
-        this.options.plugin.callback(this.state);
+    if (-available > next) {
+      return;
     }
+    this._updateSalt();
+    this.state.moveY -= this.state.saltMoveY;
+    this.options.plugin.move(this.state.moveX, this.state.moveY);
+    this.options.plugin.callback(this.state);
+  }
 
-    rotateLeft() {
-        this.state.rotate -= 180;
-        this.options.plugin.rotate(this.state.rotate);
-        this.options.plugin.callback(this.state);
-    }
+  reset() {
+    this.state.zoom = 1;
+    this.state.moveX = 0;
+    this.state.moveY = 0;
+    this.state.rotate = 0;
+    this.state.moveCount = 0;
+    this.options.plugin.zoom(1);
+    this.options.plugin.rotate(0);
+    this.options.plugin.move(0, 0);
+    this.options.plugin.callback(this.state);
+  }
 
-    rotateRight() {
-        this.state.rotate += 180;
-        this.options.plugin.rotate(this.state.rotate);
-        this.options.plugin.callback(this.state);
+  moveLeft() {
+    const next = this.state.moveX + this.state.saltMoveX;
+
+    const available = this.state.moveCount * this.state.saltMoveX;
+
+    if (available < next) {
+      return;
     }
+    this._updateSalt();
+    this.state.moveX += this.state.saltMoveX;
+    this.options.plugin.move(this.state.moveX, this.state.moveY);
+    this.options.plugin.callback(this.state);
+  }
+
+  moveRight() {
+    const next = this.state.moveX - this.state.saltMoveX;
+
+    const available = this.state.moveCount * this.state.saltMoveX;
+
+    if (-available > next) {
+      return;
+    }
+    this._updateSalt();
+    this.state.moveX -= this.state.saltMoveX;
+    this.options.plugin.move(this.state.moveX, this.state.moveY);
+    this.options.plugin.callback(this.state);
+  }
+
+  rotateLeft() {
+    this.state.rotate -= 180;
+    this.options.plugin.rotate(this.state.rotate);
+    this.options.plugin.callback(this.state);
+  }
+
+  rotateRight() {
+    this.state.rotate += 180;
+    this.options.plugin.rotate(this.state.rotate);
+    this.options.plugin.callback(this.state);
+  }
 }
