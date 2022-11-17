@@ -7,7 +7,7 @@ import '../src/plugin';
 
 window.onload = () => {
     const video = videojs('my-video');
-    const zoomPlugin = video.zoomPlugin({zoom: 1});
+    const zoomPlugin = video.zoomPlugin();
     zoomPlugin.onchange(data => {
         console.log(data);
     });

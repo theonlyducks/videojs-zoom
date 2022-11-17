@@ -22,10 +22,7 @@
         "url": "https://github.com/theonlyducks/videojs-zoom-duck/issues"
     },
     "vjsstandard": {
-        "ignore": [
-            "dist",
-            "docs"
-        ]
+      "jsdoc": false
     },
     "videojs-plugin": {
         "style": "",
