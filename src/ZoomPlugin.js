@@ -2,6 +2,7 @@ import videojs from 'video.js';
 import packageJson from '../package.json';
 
 const {version: VERSION} = packageJson;
+const registerPlugin = videojs.registerPlugin || videojs.plugin;
 
 const Plugin = videojs.getPlugin('plugin');
 
@@ -62,5 +63,6 @@ class ZoomPlugin extends Plugin {
 
 ZoomPlugin.VERSION = VERSION;
 
-videojs.registerPlugin('zoomPlugin', ZoomPlugin);
+registerPlugin('zoomPlugin', ZoomPlugin);
+
 export default ZoomPlugin;

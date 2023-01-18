@@ -1,3 +1,3 @@
-import './ZoomModal';
-import './ZoomButton';
-import './ZoomPlugin';
+import './ZoomModal.js';
+import './ZoomButton.js';
+import './ZoomPlugin.js';

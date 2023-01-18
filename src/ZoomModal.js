@@ -2,8 +2,8 @@ import videojs from 'video.js';
 
 const Component = videojs.getComponent('Component');
 
-import ZoomFunction from './ZoomFunction';
-import ZoomModalContent from './ZoomModalContent';
+import ZoomFunction from './ZoomFunction.js';
+import ZoomModalContent from './ZoomModalContent.js';
 
 class ZoomModal extends Component {
 

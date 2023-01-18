@@ -1,7 +1,7 @@
 {
   "name": "@theonlyducks/videojs-zoom",
   "title": "Video.js Zoom",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "private": false,
   "description": "Simple plugin to zoom in video.js player",
