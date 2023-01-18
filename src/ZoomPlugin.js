@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 import packageJson from '../package.json';
 
-const { version: VERSION } = packageJson;
+const {version: VERSION} = packageJson;
 
 const Plugin = videojs.getPlugin('plugin');
 

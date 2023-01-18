@@ -6,9 +6,9 @@ import '../src/plugin.css';
 import '../src/plugin';
 
 window.onload = () => {
-    const video = videojs('my-video');
-    const zoomPlugin = video.zoomPlugin();
-    zoomPlugin.onchange(data => {
-        console.log(data);
-    });
+  const video = videojs('my-video');
+  const zoomPlugin = video.zoomPlugin();
+  zoomPlugin.onchange(data => {
+    console.log(data);
+  });
 };

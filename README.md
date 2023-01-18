@@ -19,7 +19,7 @@
 
 ## Documentation
 
-See 
+See
 
 ## Getting started
 
@@ -46,14 +46,17 @@ zoomPlugin.onchange(data => {
 ## Development
 
 Install
+
 ```shell
 yarn
 ```
 
 Start server listening https://localhost:3000
+
 ```shell
 yarn start
 ```
 
 ## License
+
 [MIT](https://opensource.org/licenses/MIT) © [The Only Ducks](https://github.com/theonlyducks)
