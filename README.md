@@ -31,7 +31,16 @@ yarn add video.js
 
 ### Installation
 
+```shell
+yarn add @theonlyducks/videojs-zoom
+```
+
 ### Usage
+
+```js
+import '@theonlyducks/videojs-zoom';
+import '@theonlyducks/videojs-zoom/dist/videojs-zoom.css';
+```
 
 #### Example
 

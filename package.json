@@ -1,7 +1,7 @@
 {
   "name": "@theonlyducks/videojs-zoom",
   "title": "Video.js Zoom",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "private": false,
   "description": "Simple plugin to zoom in video.js player",
@@ -67,6 +67,7 @@
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
     "rollup": "^3.3.0",
+    "rollup-plugin-copy": "^3.4.0",
     "style-loader": "^3.3.1",
     "video.js": "^7.20.3",
     "videojs-generate-karma-config": "^8.0.1",
