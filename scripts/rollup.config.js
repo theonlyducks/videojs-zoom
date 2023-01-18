@@ -2,6 +2,19 @@ import copy from 'rollup-plugin-copy';
 import generate from 'videojs-generate-rollup-config';
 
 const options = {
+  globals(defaults) {
+    return {
+      browser: Object.assign(defaults.browser, {
+        'video.js': 'videojs',
+      }),
+      module: Object.assign(defaults.module, {
+        'video.js': 'videojs'
+      }),
+      test: Object.assign(defaults.test, {
+        'video.js': 'videojs'
+      }),
+    };
+  },
   plugins(defaults) {
     return {
       browser: defaults.browser.concat([
