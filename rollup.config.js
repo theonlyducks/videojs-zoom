@@ -8,27 +8,33 @@ const resolve = require('@rollup/plugin-node-resolve');
 const packageJson = require("./package.json");
 
 module.exports = {
-	input: 'src/plugin.js',
+	input: 'src/ZoomPlugin.js',
 	external: [ 'video.js' ],
-	globals: {
-		'video.js': 'videojs'
-	},
 	output: [
 		{
 			name: packageJson.name,
 			file: packageJson.browser,
-			format: 'umd'
+			format: 'umd',
+			globals: {
+				'video.js': 'videojs'
+			},
 		},
 		{
 			name: packageJson.name,
 			file: packageJson.main,
 			format: 'cjs',
-			exports: 'auto'
+			exports: 'auto',
+			globals: {
+				'video.js': 'videojs'
+			},
 		},
 		{
 			name: packageJson.name,
 			file: packageJson.module,
-			format: 'esm'
+			format: 'esm',
+			globals: {
+				'video.js': 'videojs'
+			},
 		}
 	],
 	plugins: [

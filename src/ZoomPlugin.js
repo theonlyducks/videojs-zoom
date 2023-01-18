@@ -62,6 +62,8 @@ class ZoomPlugin extends Plugin {
 
 }
 
+ZoomPlugin.defaultState = {};
+
 ZoomPlugin.VERSION = VERSION;
 
 videojs.registerComponent('ZoomModal', ZoomModal);

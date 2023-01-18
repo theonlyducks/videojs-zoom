@@ -1,14 +1,24 @@
 {
 	"name": "@theonlyducks/videojs-zoom",
 	"title": "Video.js Zoom",
-	"version": "1.0.5",
+	"version": "1.0.13",
 	"private": false,
 	"description": "Simple plugin to zoom in video.js player",
 	"author": "Giovane Santos <giovanesantos1999@gmail.com>",
 	"license": "MIT",
-	"main": "dist/videojs-zoom.cjs.js",
-	"module": "dist/videojs-zoom.es.js",
-	"browser": "dist/videojs-zoom.js",
+	"main": "./dist/videojs-zoom.cjs.js",
+	"module": "./dist/videojs-zoom.es.js",
+	"browser": "./dist/videojs-zoom.js",
+	"exports": {
+		".": {
+			"import": "./dist/videojs-zoom.es.js",
+			"require": "./dist/videojs-zoom.cjs.js"
+		},
+		"./styles": {
+			"import": "./dist/videojs-zoom.css",
+			"require": "./dist/videojs-zoom.css"
+		}
+	},
 	"scripts": {
 		"build": "yarn clean && yarn build:js && yarn build:css",
 		"build:js": "rollup -c",
