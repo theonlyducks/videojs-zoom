@@ -2,6 +2,7 @@
   "name": "@theonlyducks/videojs-zoom",
   "title": "Video.js Zoom",
   "version": "1.0.0",
+  "type": "module",
   "private": false,
   "description": "Simple plugin to zoom in video.js player",
   "author": "Giovane Santos <giovanesantos1999@gmail.com>",
@@ -13,8 +14,13 @@
     "version": "8.0.0"
   },
   "scripts": {
+    "build": "yarn clean && yarn build:js && yarn build:css",
+    "build:js": "rollup -c scripts/rollup.config.js",
+    "build:css": "postcss -o dist/videojs-zoom.css --config scripts/postcss.config.js src/plugin.css",
+    "clean": "rm -rf ./dist ./test/dist",
     "lint": "vjsstandard src/**/*.js",
-    "start": "webpack serve --progress"
+    "start": "webpack serve --progress",
+    "test": "karma start scripts/karma.config.js"
   },
   "engines": {
     "node": ">=16.0"
@@ -35,7 +41,7 @@
   },
   "files": [
     "README.md",
-    "dist"
+    "dist/"
   ],
   "keywords": [
     "videojs",
@@ -56,9 +62,14 @@
     "babel-loader": "^9.0.1",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "karma": "^6.4.1",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
     "rollup": "^3.3.0",
     "style-loader": "^3.3.1",
     "video.js": "^7.20.3",
+    "videojs-generate-karma-config": "^8.0.1",
+    "videojs-generate-postcss-config": "^2.1.1",
     "videojs-generate-rollup-config": "^7.0.0",
     "videojs-standard": "^9.0.1",
     "webpack": "^5.74.0",
