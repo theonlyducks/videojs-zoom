@@ -48,7 +48,7 @@ import '@theonlyducks/videojs-zoom/dist/videojs-zoom.css';
 const video = videojs('my-video');
 const zoomPlugin = video.zoomPlugin();
 zoomPlugin.onchange(data => {
-  console.log(data);
+	console.log(data);
 });
 ```
 

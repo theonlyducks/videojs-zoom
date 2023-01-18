@@ -1,4 +1,4 @@
-# Release 1.0.0 (January 18, 2023)
+# Release 1.0.5 (January 18, 2023)
 
 ## Implemented
 
