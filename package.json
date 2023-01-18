@@ -40,8 +40,9 @@
     "script": ""
   },
   "files": [
-    "README.md",
-    "dist/"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "keywords": [
     "videojs",
