@@ -1,20 +1,20 @@
 {
   "name": "@theonlyducks/videojs-zoom",
   "title": "Video.js Zoom",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "private": false,
   "description": "Simple plugin to zoom in video.js player",
   "author": "Giovane Santos <giovanesantos1999@gmail.com>",
   "license": "MIT",
   "main": "dist/videojs-zoom.cjs.js",
-  "module": "dist/videojs-zoom.esm.js",
+  "module": "dist/videojs-zoom.es.js",
   "browser": "dist/videojs-zoom.js",
   "generator-videojs-plugin": {
     "version": "8.0.0"
   },
   "scripts": {
-    "build": "yarn clean && yarn build:js && yarn build:css",
+    "build": "yarn lint && yarn clean && yarn build:js && yarn build:css",
     "build:js": "rollup -c scripts/rollup.config.js",
     "build:css": "postcss -o dist/videojs-zoom.css --config scripts/postcss.config.js src/plugin.css",
     "clean": "rm -rf ./dist ./test/dist",
@@ -77,5 +77,6 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
-  }
+  },
+  "dependencies": {}
 }
