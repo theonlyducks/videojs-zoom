@@ -1,11 +1,11 @@
 import videojs from 'video.js';
 import packageJson from '../package.json';
 
+import { ZOOM_SALT } from "./ZoomFunction";
 import { ZoomModal } from './ZoomModal';
 import { ZoomButton } from "./ZoomButton";
 
 const { version: VERSION } = packageJson;
-
 const Plugin = videojs.getPlugin('plugin');
 
 const DEFAULT_OPTIONS = {
@@ -19,11 +19,16 @@ class ZoomPlugin extends Plugin {
 
 	constructor(player, options = {}) {
 		super(player, options);
+		videojs.log('[~Zoom Plugin] start ', options);
+		this.p = player;
 		this.player = player.el();
-		this.callback = () => { };
+		this.listeners = {
+			click: () => { },
+			change: () => { },
+		};
 		this.player.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
-		videojs.log('zoom plugin start ', options);
+		this.state.moveCount = Math.ceil((this.state.zoom - 1) / ZOOM_SALT);
 		player.getChild('ControlBar').addChild('ZoomButton');
 		player.addChild('ZoomModal', { plugin: this, state: this.state });
 		this._setTransform();
@@ -48,8 +53,12 @@ class ZoomPlugin extends Plugin {
 		this._setTransform();
 	}
 
-	onchange(callback) {
-		this.callback = callback;
+	openModal() {
+		this.p.getChild('ZoomModal').open();
+	}
+
+	listen(listener, callback) {
+		this.listeners[listener] = callback;
 	}
 
 	_setTransform() {

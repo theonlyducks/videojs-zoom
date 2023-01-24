@@ -9,9 +9,8 @@ export class ZoomModal extends Component {
 
 	constructor(player, options) {
 		super(player, options);
-		this.player = player;
-		this.options = options;
-		console.log(options);
+		this.player = player.el();
+		this.plugin = options.plugin;
 		this.function = new ZoomFunction(player, options);
 		player.on('playing', () => {
 			this.listeners();
@@ -28,7 +27,7 @@ export class ZoomModal extends Component {
 	}
 
 	listeners() {
-		let buttons = this.player.el().getElementsByClassName('vjs-zoom-duck__button');
+		let buttons = this.player.getElementsByClassName('vjs-zoom-duck__button');
 		buttons = Array.from(buttons);
 		buttons.map(button => {
 			const [, action] = button.id.split('__');
@@ -37,8 +36,9 @@ export class ZoomModal extends Component {
 	}
 
 	open() {
-		const [ modal ] = this.player.el().getElementsByClassName('vjs-zoom-duck__container');
+		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
 		modal.classList.toggle('open');
+		this.plugin.listeners.click();
 	}
 
 }

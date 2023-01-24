@@ -1,4 +1,4 @@
-const ZOOM_SALT = 0.2;
+export const ZOOM_SALT = 0.2;
 
 export class ZoomFunction {
 
@@ -11,6 +11,7 @@ export class ZoomFunction {
 		};
 		this.player = player.el();
 		this.options = options;
+		this.plugin = options.plugin;
 		player.on('playing', () => {
 			this._updateSalt();
 		});
@@ -27,8 +28,8 @@ export class ZoomFunction {
 		}
 		this.state.moveCount++;
 		this.state.zoom += ZOOM_SALT;
-		this.options.plugin.zoom(this.state.zoom);
-		this.options.plugin.callback(this.state);
+		this.plugin.zoom(this.state.zoom);
+		this.plugin.listeners.change(this.state);
 	}
 
 	zoomOut() {
@@ -39,7 +40,7 @@ export class ZoomFunction {
 		this.state.zoom -= ZOOM_SALT;
 		this.options.plugin.zoom(this.state.zoom);
 		this.options.plugin.move(0, 0);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 
 	moveUp() {
@@ -51,7 +52,7 @@ export class ZoomFunction {
 		this._updateSalt();
 		this.state.moveY += this.state.saltMoveY;
 		this.options.plugin.move(this.state.moveX, this.state.moveY);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 
 	moveDown() {
@@ -63,7 +64,7 @@ export class ZoomFunction {
 		this._updateSalt();
 		this.state.moveY -= this.state.saltMoveY;
 		this.options.plugin.move(this.state.moveX, this.state.moveY);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 
 	reset() {
@@ -75,7 +76,7 @@ export class ZoomFunction {
 		this.options.plugin.zoom(1);
 		this.options.plugin.rotate(0);
 		this.options.plugin.move(0, 0);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 
 	moveLeft() {
@@ -87,7 +88,7 @@ export class ZoomFunction {
 		this._updateSalt();
 		this.state.moveX += this.state.saltMoveX;
 		this.options.plugin.move(this.state.moveX, this.state.moveY);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 
 	moveRight() {
@@ -99,18 +100,18 @@ export class ZoomFunction {
 		this._updateSalt();
 		this.state.moveX -= this.state.saltMoveX;
 		this.options.plugin.move(this.state.moveX, this.state.moveY);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 
 	rotateLeft() {
 		this.state.rotate -= 180;
 		this.options.plugin.rotate(this.state.rotate);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 
 	rotateRight() {
 		this.state.rotate += 180;
 		this.options.plugin.rotate(this.state.rotate);
-		this.options.plugin.callback(this.state);
+		this.plugin.listeners.change(this.state);
 	}
 }
