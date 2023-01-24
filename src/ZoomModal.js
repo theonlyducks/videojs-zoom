@@ -11,6 +11,7 @@ export class ZoomModal extends Component {
 		super(player, options);
 		this.player = player;
 		this.options = options;
+		console.log(options);
 		this.function = new ZoomFunction(player, options);
 		player.on('playing', () => {
 			this.listeners();

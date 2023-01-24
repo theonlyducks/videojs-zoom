@@ -4,13 +4,10 @@ export class ZoomFunction {
 
 	constructor(player, options) {
 		this.state = {
-			zoom: 1,
-			rotate: 0,
-			moveX: 0,
-			moveY: 0,
-			moveCount: 0,
+			...options.state,
 			saltMoveX: 70,
-			saltMoveY: 70
+			saltMoveY: 70,
+			moveCount: Math.ceil((options.state.zoom - 1) / ZOOM_SALT)
 		};
 		this.player = player.el();
 		this.options = options;

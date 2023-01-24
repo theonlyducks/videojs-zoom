@@ -25,7 +25,8 @@ class ZoomPlugin extends Plugin {
 		this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
 		videojs.log('zoom plugin start ', options);
 		player.getChild('ControlBar').addChild('ZoomButton');
-		player.addChild('ZoomModal', {plugin: this});
+		player.addChild('ZoomModal', { plugin: this, state: this.state });
+		this._setTransform();
 	}
 
 	zoom(value) {
