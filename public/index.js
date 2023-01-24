@@ -14,4 +14,8 @@ window.onload = () => {
 	zoomPlugin.listen('change', data => {
 		console.log('onchange', data);
 	});
-};
+	const button = document.getElementById('my-button');
+	button.onclick = () => {
+		zoomPlugin.toggle();
+	};
+}

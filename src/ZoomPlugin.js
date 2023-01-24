@@ -53,8 +53,9 @@ class ZoomPlugin extends Plugin {
 		this._setTransform();
 	}
 
-	openModal() {
-		this.p.getChild('ZoomModal').open();
+	toggle() {
+		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
+		modal.classList.toggle('open');
 	}
 
 	listen(listener, callback) {
