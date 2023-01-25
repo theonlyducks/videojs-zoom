@@ -1,16 +1,18 @@
+import { Observer } from "./helpers/Observer";
+
 export const ZOOM_SALT = 0.2;
 
 export class ZoomFunction {
 
 	constructor(player, options) {
-		this.state = {
-			...options.state,
-			saltMoveX: 70,
-			saltMoveY: 70
-		};
 		this.player = player.el();
 		this.plugin = options.plugin;
+		this.observer = Observer.getInstance();
 		player.on('playing', () => {
+			this._updateSalt();
+		});
+		this.observer.subscribe('change', state => {
+			this.state = { ...state, saltMoveX: 70, saltMoveY: 70 };
 			this._updateSalt();
 		});
 	}

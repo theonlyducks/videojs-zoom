@@ -4,6 +4,7 @@ import packageJson from '../package.json';
 import { ZOOM_SALT } from "./ZoomFunction";
 import { ZoomModal } from './ZoomModal';
 import { ZoomButton } from "./ZoomButton";
+import { Observer } from "./helpers/Observer";
 
 const { version: VERSION } = packageJson;
 const Plugin = videojs.getPlugin('plugin');
@@ -20,7 +21,6 @@ class ZoomPlugin extends Plugin {
 	constructor(player, options = {}) {
 		super(player, options);
 		videojs.log('[~Zoom Plugin] start ', options);
-		this.p = player;
 		this.player = player.el();
 		this.listeners = {
 			click: () => { },
@@ -28,9 +28,10 @@ class ZoomPlugin extends Plugin {
 		};
 		this.player.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
-		this.state.moveCount = Math.ceil((this.state.zoom - 1) / ZOOM_SALT);
+		this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
 		player.getChild('ControlBar').addChild('ZoomButton');
 		player.addChild('ZoomModal', { plugin: this, state: this.state });
+		this._observer = Observer.getInstance();
 		this._setTransform();
 	}
 
@@ -39,6 +40,7 @@ class ZoomPlugin extends Plugin {
 			throw new Error('Zoom value invalid');
 		}
 		this.state.zoom = value;
+		this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
 		this._setTransform();
 	}
 
@@ -69,6 +71,7 @@ class ZoomPlugin extends Plugin {
 			scale(${this.state.zoom}) 
 			rotate(${this.state.rotate}deg)
 		`;
+		this._observer.notify('change', this.state);
 	}
 
 }

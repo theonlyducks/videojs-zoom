@@ -2,7 +2,6 @@
 
 > Simple plugin to zoom in video.js player
 
-
 ![Version](https://img.shields.io/github/package-json/v/theonlyducks/videojs-zoom)
 ![Project Size](https://img.shields.io/bundlephobia/min/@theonlyducks/videojs-zoom@latest)
 ![Dependencies](https://img.shields.io/github/languages/top/theonlyducks/videojs-zoom)
@@ -32,6 +31,10 @@ yarn add video.js
 ### Installation
 
 ```shell
+npm install @theonlyducks/videojs-zoom@latest
+```
+or
+```shell
 yarn add @theonlyducks/videojs-zoom@latest
 ```
 
@@ -49,6 +52,76 @@ const video = videojs('my-video');
 const zoomPlugin = video.zoomPlugin();
 zoomPlugin.listen('change', data => {
 	console.log(data);
+});
+```
+
+## Methods
+
+### zoom(value): void
+
+Zoom function
+
+- **value**
+	- type: `Number`
+	
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.zoom(2);
+```
+
+### rotate(value): void
+
+Rotate function
+
+- **value**
+	- type: `Number` in deg
+
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.rotate(180);
+```
+
+### move(x, y): void
+
+Rotate function
+
+- **x**
+	- type: `Number`
+- **y**
+	- type: `Number`	
+
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.move(0, 0);
+```
+
+### toggle(): void
+
+Open and close modal function
+
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.toggle();
+```
+
+## Events
+
+### listen(event, callback): void
+
+Listen events of the zoom plugin
+
+- **event**
+	- type: `String`
+	- options: 
+	  - `'change'` when click in buttons modal
+	  - `'click'` when modal is opened or closed
+- **callback**
+	- type: `Function`
+
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.listen('click', () => {
+    console.log('click');
 });
 ```
 
