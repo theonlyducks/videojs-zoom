@@ -38,8 +38,8 @@ yarn add @theonlyducks/videojs-zoom@latest
 ### Usage
 
 ```js
-import '@theonlyducks/videojs-zoom';
 import '@theonlyducks/videojs-zoom/styles';
+import '@theonlyducks/videojs-zoom';
 ```
 
 #### Example
@@ -47,7 +47,7 @@ import '@theonlyducks/videojs-zoom/styles';
 ```js
 const video = videojs('my-video');
 const zoomPlugin = video.zoomPlugin();
-zoomPlugin.onchange(data => {
+zoomPlugin.listen('change', data => {
 	console.log(data);
 });
 ```
