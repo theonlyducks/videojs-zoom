@@ -6,11 +6,9 @@ export class ZoomFunction {
 		this.state = {
 			...options.state,
 			saltMoveX: 70,
-			saltMoveY: 70,
-			moveCount: Math.ceil((options.state.zoom - 1) / ZOOM_SALT)
+			saltMoveY: 70
 		};
 		this.player = player.el();
-		this.options = options;
 		this.plugin = options.plugin;
 		player.on('playing', () => {
 			this._updateSalt();
@@ -22,49 +20,47 @@ export class ZoomFunction {
 		this.state.saltMoveY = (this.player.offsetHeight * ZOOM_SALT) / 2;
 	}
 
-	zoomIn() {
-		if (this.state.zoom >= 9.8) {
-			return;
-		}
-		this.state.moveCount++;
-		this.state.zoom += ZOOM_SALT;
+	_zoom() {
 		this.plugin.zoom(this.state.zoom);
 		this.plugin.listeners.change(this.state);
 	}
 
+	zoomIn() {
+		if (this.state.zoom >= 9.8) return;
+		this.state.moveCount++;
+		this.state.zoom += ZOOM_SALT;
+		this._zoom();
+	}
+
 	zoomOut() {
-		if (this.state.zoom <= 1) {
-			return;
-		}
+		if (this.state.zoom <= 1) return;
 		this.state.moveCount--;
 		this.state.zoom -= ZOOM_SALT;
-		this.options.plugin.zoom(this.state.zoom);
-		this.options.plugin.move(0, 0);
+		this.plugin.move(0, 0);
+		this._zoom();
+	}
+
+	_move() {
+		this.plugin.move(this.state.moveX, this.state.moveY);
 		this.plugin.listeners.change(this.state);
 	}
 
 	moveUp() {
 		const next = this.state.moveY + this.state.saltMoveY;
 		const available = this.state.moveCount * this.state.saltMoveY;
-		if (available < next) {
-			return;
-		}
+		if (available < next) return;
 		this._updateSalt();
 		this.state.moveY += this.state.saltMoveY;
-		this.options.plugin.move(this.state.moveX, this.state.moveY);
-		this.plugin.listeners.change(this.state);
+		this._move();
 	}
 
 	moveDown() {
 		const next = this.state.moveY - this.state.saltMoveY;
 		const available = this.state.moveCount * this.state.saltMoveY;
-		if (-available > next) {
-			return;
-		}
+		if (-available > next) return;
 		this._updateSalt();
 		this.state.moveY -= this.state.saltMoveY;
-		this.options.plugin.move(this.state.moveX, this.state.moveY);
-		this.plugin.listeners.change(this.state);
+		this._move();
 	}
 
 	reset() {
@@ -73,45 +69,43 @@ export class ZoomFunction {
 		this.state.moveY = 0;
 		this.state.rotate = 0;
 		this.state.moveCount = 0;
-		this.options.plugin.zoom(1);
-		this.options.plugin.rotate(0);
-		this.options.plugin.move(0, 0);
+		this.plugin.zoom(1);
+		this.plugin.rotate(0);
+		this.plugin.move(0, 0);
 		this.plugin.listeners.change(this.state);
 	}
 
 	moveLeft() {
 		const next = this.state.moveX + this.state.saltMoveX;
 		const available = this.state.moveCount * this.state.saltMoveX;
-		if (available < next) {
-			return;
-		}
+		if (available < next) return;
 		this._updateSalt();
 		this.state.moveX += this.state.saltMoveX;
-		this.options.plugin.move(this.state.moveX, this.state.moveY);
-		this.plugin.listeners.change(this.state);
+		this._move();
 	}
 
 	moveRight() {
 		const next = this.state.moveX - this.state.saltMoveX;
 		const available = this.state.moveCount * this.state.saltMoveX;
-		if (-available > next) {
-			return;
-		}
+		if (-available > next) return;
 		this._updateSalt();
 		this.state.moveX -= this.state.saltMoveX;
-		this.options.plugin.move(this.state.moveX, this.state.moveY);
+		this._move();
+	}
+
+	_rotate() {
+		this.plugin.rotate(this.state.rotate);
 		this.plugin.listeners.change(this.state);
 	}
 
 	rotateLeft() {
 		this.state.rotate -= 180;
-		this.options.plugin.rotate(this.state.rotate);
-		this.plugin.listeners.change(this.state);
+		this._rotate();
 	}
 
 	rotateRight() {
 		this.state.rotate += 180;
-		this.options.plugin.rotate(this.state.rotate);
-		this.plugin.listeners.change(this.state);
+		this._rotate();
 	}
+
 }
