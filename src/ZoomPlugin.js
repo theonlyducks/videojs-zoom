@@ -13,6 +13,7 @@ const DEFAULT_OPTIONS = {
 	zoom: 1,
 	moveX: 0,
 	moveY: 0,
+	flip: "+",
 	rotate: 0
 };
 
@@ -28,6 +29,7 @@ class ZoomPlugin extends Plugin {
 		};
 		this.player.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
+		this.state.flip = "+";
 		this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
 		player.getChild('ControlBar').addChild('ZoomButton');
 		player.addChild('ZoomModal', { plugin: this, state: this.state });
@@ -55,6 +57,11 @@ class ZoomPlugin extends Plugin {
 		this._setTransform();
 	}
 
+	flip(signal) {
+		this.state.flip = signal;
+		this._setTransform();
+	}
+
 	toggle() {
 		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
 		modal.classList.toggle('open');
@@ -64,14 +71,18 @@ class ZoomPlugin extends Plugin {
 		this.listeners[listener] = callback;
 	}
 
+	_notify() {
+		this._observer.notify('change', this.state);
+	}
+
 	_setTransform() {
 		const [ video ] = this.player.getElementsByTagName('video');
 		video.style.transform = `
 			translate(${this.state.moveX}px, ${this.state.moveY}px) 
-			scale(${this.state.zoom}) 
+			scale(${this.state.flip}${this.state.zoom}, ${this.state.zoom}) 
 			rotate(${this.state.rotate}deg)
 		`;
-		this._observer.notify('change', this.state);
+		this._notify();
 	}
 
 }

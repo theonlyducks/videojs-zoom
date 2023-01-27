@@ -14,8 +14,12 @@ window.onload = () => {
 	zoomPlugin.listen('change', data => {
 		console.log('onchange', data);
 	});
-	const button = document.getElementById('my-button');
-	button.onclick = () => {
+	const open = document.getElementById('my-open');
+	open.onclick = () => {
 		zoomPlugin.toggle();
+	};
+	const rotate = document.getElementById('my-rotate');
+	rotate.onclick = () => {
+		zoomPlugin.rotate(180);
 	};
 }

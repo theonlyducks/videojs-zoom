@@ -31,15 +31,17 @@ export class ZoomFunction {
 		if (this.state.zoom >= 9.8) return;
 		this.state.moveCount++;
 		this.state.zoom += ZOOM_SALT;
-		this._zoom();
+		this.plugin.zoom(this.state.zoom);
+		this.plugin.listeners.change(this.state);
 	}
 
 	zoomOut() {
 		if (this.state.zoom <= 1) return;
 		this.state.moveCount--;
 		this.state.zoom -= ZOOM_SALT;
+		this.plugin.zoom(this.state.zoom);
 		this.plugin.move(0, 0);
-		this._zoom();
+		this.plugin.listeners.change(this.state);
 	}
 
 	_move() {
@@ -72,6 +74,7 @@ export class ZoomFunction {
 		this.state.rotate = 0;
 		this.state.moveCount = 0;
 		this.plugin.zoom(1);
+		this.plugin.flip("+");
 		this.plugin.rotate(0);
 		this.plugin.move(0, 0);
 		this.plugin.listeners.change(this.state);
@@ -100,14 +103,22 @@ export class ZoomFunction {
 		this.plugin.listeners.change(this.state);
 	}
 
-	rotateLeft() {
+	rotate() {
 		this.state.rotate -= 180;
+		if (this.state.rotate === -360) {
+			this.state.rotate = 0
+		}
 		this._rotate();
 	}
 
-	rotateRight() {
-		this.state.rotate += 180;
-		this._rotate();
+	_flip() {
+		this.plugin.flip(this.state.flip);
+		this.plugin.listeners.change(this.state);
+	}
+
+	flip() {
+		this.state.flip = this.state.flip === "+" ? "-" : "+";
+		this._flip();
 	}
 
 }

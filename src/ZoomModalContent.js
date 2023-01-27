@@ -46,12 +46,12 @@ export class ZoomModalContent {
 				<span class="vjs-zoom-duck__space"></span>
 			</div>
 			<div class="vjs-zoom-duck__container--row">
-				<button id="vjs-zoom-duck__rotateLeft" class="vjs-zoom-duck__button">
+				<button id="vjs-zoom-duck__rotate" class="vjs-zoom-duck__button">
 					<span class="vjs-zoom-icons">rotate_left</span>
 				</button>
 				<span class="vjs-zoom-duck__space"></span>
-				<button id="vjs-zoom-duck__rotateRight" class="vjs-zoom-duck__button">
-					<span class="vjs-zoom-icons">rotate_right</span>
+				<button id="vjs-zoom-duck__flip" class="vjs-zoom-duck__button">
+					<span class="vjs-zoom-icons">swap_horiz</span>
 				</button>
 			</div>
 		`;

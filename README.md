@@ -104,6 +104,18 @@ const zoomPlugin = video.zoomPlugin();
 zoomPlugin.toggle();
 ```
 
+### flip(signal): void
+
+Flip video image
+
+- **x**
+	- type: `String` use + or - for flip image
+
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.flip("-");
+```
+
 ## Events
 
 ### listen(event, callback): void
