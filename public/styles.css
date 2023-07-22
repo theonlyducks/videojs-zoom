@@ -9,7 +9,27 @@ html, body, #root {
 	height: 100%;
 }
 
+body {
+	background: black;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.buttons {
+	padding: 8px;
+}
+
+.buttons button {
+	min-width: 100px;
+	padding: 4px;
+	border: none;
+}
+
 #my-video {
-	width: 640px;
-	height: 360px;
+	max-width: 720px;
+	border-radius: 8px;
+	aspect-ratio: 16 / 9;
 }
