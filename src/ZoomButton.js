@@ -6,6 +6,12 @@ export class ZoomButton extends Button {
 
 	constructor(player, options) {
 		super(player, options);
+		player.on('useractive', () => {
+			console.log('useractive');
+		});
+		player.on('userinactive', () => {
+			console.log('userinactive');
+		});
 	}
 
 	buildCSSClass() {
