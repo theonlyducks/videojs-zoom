@@ -40,13 +40,17 @@
 	right: 0;
 	bottom: 30px;
 	padding: 10px;
-	display: none;
+	visibility: hidden;
 	position: absolute;
+	opacity: 0;
 	background-color: rgba(43, 51, 63, .7);
+	transition: visibility .2s, opacity .2s;
 }
 
 .video-js .vjs-zoom-duck__container.open {
 	display: flex;
+	opacity: 1;
+	visibility: visible;
 	flex-direction: column;
 }
 
