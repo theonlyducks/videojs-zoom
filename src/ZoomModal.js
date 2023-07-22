@@ -35,9 +35,21 @@ export class ZoomModal extends Component {
 		});
 	}
 
-	open() {
+	toggle() {
 		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
 		modal.classList.toggle('open');
+		this.plugin.listeners.click();
+	}
+
+	open() {
+		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
+		modal.classList.add('open');
+		this.plugin.listeners.click();
+	}
+
+	close() {
+		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
+		modal.classList.remove('open');
 		this.plugin.listeners.click();
 	}
 

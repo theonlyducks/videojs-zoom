@@ -6,11 +6,16 @@ export class ZoomButton extends Button {
 
 	constructor(player, options) {
 		super(player, options);
+		this.isOpen = false;
 		player.on('useractive', () => {
-			console.log('useractive');
+			if (!this.isOpen) return;
+			const modal = this.player().getChild('ZoomModal');
+			modal.open();
 		});
 		player.on('userinactive', () => {
-			console.log('userinactive');
+			if (!this.isOpen) return;
+			const modal = this.player().getChild('ZoomModal');
+			modal.close();
 		});
 	}
 
@@ -19,9 +24,10 @@ export class ZoomButton extends Button {
 	}
 
 	handleClick() {
-		videojs.log('[~Zoom Plugin] button handleClick');
 		const modal = this.player().getChild('ZoomModal');
-		modal.open();
+		videojs.log('[~Zoom Plugin] button handleClick');
+		this.isOpen = !this.isOpen;
+		modal.toggle();
 	}
 
 }
