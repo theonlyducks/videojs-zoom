@@ -116,6 +116,21 @@ const zoomPlugin = video.zoomPlugin();
 zoomPlugin.flip("-");
 ```
 
+## Options
+
+```
+const zoomPlugin = video.zoomPlugin({
+	showZoom: true,
+	showMove: true,
+	showRotateFlip: true,
+	gestureZoomMove: false,
+});
+```
+- `showZoom` show/hide +- zoom buttons. default `true`
+- `showMove` show/hide up, left, right, reset and down buttons. default `true`
+- `showRotateFlip` show/hide rotate and flip buttons. default `true`
+- `gestureZoomMove` enable gesture zoom pinch, swipe, drag and drop, wheel. default `false`
+
 ## Events
 
 ### listen(event, callback): void
