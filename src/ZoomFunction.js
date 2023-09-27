@@ -70,13 +70,13 @@ export class ZoomFunction {
 	}
 
 	moveLeft(salt) {
-		const available = this.player.offsetHeight * this.available;
+		const available = this.player.offsetWidth * this.available;
 		this.state.moveX = Math.max(- available, Math.min(available, this.state.moveX + (salt ?? this.state.saltMoveX)));
 		this._move();
 	}
 
 	moveRight() {
-		const available = this.player.offsetHeight * this.available;
+		const available = this.player.offsetWidth * this.available;
 		this.state.moveX = Math.max(- available, this.state.moveX - this.state.saltMoveX);
 		this._move();
 	}
