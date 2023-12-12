@@ -1,25 +1,24 @@
-import videojs from 'video.js';
+import videojs from "video.js";
 
-import { ZoomFunction } from './ZoomFunction';
-import { ZoomModalContent } from './ZoomModalContent';
+import { ZoomFunction } from "./ZoomFunction";
+import { ZoomModalContent } from "./ZoomModalContent";
 
-const Component = videojs.getComponent('Component');
+const Component = videojs.getComponent("Component");
 
 export class ZoomModal extends Component {
-
 	constructor(player, options) {
 		super(player, options);
 		this.player = player.el();
 		this.plugin = options.plugin;
 		this.function = new ZoomFunction(player, options);
-		player.on('playing', () => {
+		player.on("playing", () => {
 			this.listeners();
 		});
 	}
 
 	createEl() {
-		const modal = videojs.dom.createEl('div', {
-			className: 'vjs-zoom-duck__container'
+		const modal = videojs.dom.createEl("div", {
+			className: "vjs-zoom-duck__container",
 		});
 		const content = new ZoomModalContent();
 		modal.innerHTML = content.getContent();
@@ -27,31 +26,38 @@ export class ZoomModal extends Component {
 	}
 
 	listeners() {
-		let buttons = this.player.getElementsByClassName('vjs-zoom-duck__button');
+		let buttons = this.player.getElementsByClassName(
+			"vjs-zoom-duck__button"
+		);
 		buttons = Array.from(buttons);
-		buttons.map(button => {
-			const [, action] = button.id.split('__');
+		buttons.map((button) => {
+			const [, action] = button.id.split("__");
 			button.onclick = () => this.function[action]();
 			button.title = action.charAt(0).toUpperCase() + action.slice(1);
 		});
 	}
 
 	toggle() {
-		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
-		modal.classList.toggle('open');
+		const [modal] = this.player.getElementsByClassName(
+			"vjs-zoom-duck__container"
+		);
+		modal.classList.toggle("open");
 		this.plugin.listeners.click();
 	}
 
 	open() {
-		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
-		modal.classList.add('open');
+		const [modal] = this.player.getElementsByClassName(
+			"vjs-zoom-duck__container"
+		);
+		modal.classList.add("open");
 		this.plugin.listeners.click();
 	}
 
 	close() {
-		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
-		modal.classList.remove('open');
+		const [modal] = this.player.getElementsByClassName(
+			"vjs-zoom-duck__container"
+		);
+		modal.classList.remove("open");
 		this.plugin.listeners.click();
 	}
-
 }
