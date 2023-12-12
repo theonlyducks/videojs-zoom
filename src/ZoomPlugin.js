@@ -28,7 +28,7 @@ class ZoomPlugin extends Plugin {
 			change: () => { },
 		};
 		this.player.style.overflow = 'hidden';
-		this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
+		this.state = videojs.obj.merge([DEFAULT_OPTIONS, options]);
 		this.state.flip = "+";
 		this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
 		player.getChild('ControlBar').addChild('ZoomButton');
