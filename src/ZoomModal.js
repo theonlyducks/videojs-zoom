@@ -32,6 +32,7 @@ export class ZoomModal extends Component {
 		buttons.map(button => {
 			const [, action] = button.id.split('__');
 			button.onclick = () => this.function[action]();
+			button.title = action.charAt(0).toUpperCase() + action.slice(1);
 		});
 	}
 
