@@ -48,23 +48,23 @@
 }
 
 .video-js .vjs-zoom-duck__container.open {
-	display: flex;
 	opacity: 1;
 	visibility: visible;
-	flex-direction: column;
-}
 
-.video-js .vjs-zoom-duck__space {
-	width: 22px;
-	height: 22px;
-	display: inline-block;
+	display: grid;
+	grid-template: 
+		'plus	.		minus'	auto 
+		'.		up		.	 '	auto
+		'left	reset	right'	auto
+		'.		down	.	 '	auto
+		'rotate	.		flip'	auto /
+		1fr		1fr		1fr;
 }
 
 .video-js .vjs-zoom-duck__button {
 	cursor: pointer;
 	border: none;
-	width: 22px;
-	height: 22px;
+	aspect-ratio: 1;
 	border-radius: 100%;
 }
 
