@@ -26,12 +26,13 @@ class ZoomPlugin extends Plugin {
 	constructor(player, options = {}) {
 		super(player, options);
 		videojs.log('[~Zoom Plugin] start ', options);
-		this.player = player.el();
+		this.player = player;
+		this.playerEl = player.el();
 		this.listeners = {
 			click: () => { },
 			change: () => { },
 		};
-		this.player.style.overflow = 'hidden';
+		this.playerEl.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
 		this.state.flip = "+";
 		if (this.state.showZoom || this.state.showMove || this.state.showRotateFlip) {
@@ -68,7 +69,7 @@ class ZoomPlugin extends Plugin {
 	}
 
 	toggle() {
-		const [ modal ] = this.player.getElementsByClassName('vjs-zoom-duck__container');
+		const [ modal ] = this.playerEl.getElementsByClassName('vjs-zoom-duck__container');
 		modal.classList.toggle('open');
 	}
 
@@ -81,7 +82,7 @@ class ZoomPlugin extends Plugin {
 	}
 
 	_setTransform() {
-		const [ video ] = this.player.getElementsByTagName('video');
+		const [ video ] = this.playerEl.getElementsByTagName('video');
 		video.style.transform = `
 			translate(${this.state.moveX}px, ${this.state.moveY}px) 
 			scale(${this.state.flip}${this.state.zoom}, ${this.state.zoom}) 
