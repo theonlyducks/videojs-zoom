@@ -17,7 +17,7 @@ const DEFAULT_OPTIONS = {
 	rotate: 0,
 	showZoom: true,
 	showMove: true,
-	showRotateFlip: true,
+	showRotate: true,
 	gestureHandler: false,
 };
 
@@ -34,8 +34,10 @@ class ZoomPlugin extends Plugin {
 		this.player.style.overflow = 'hidden';
 		this.state = videojs.mergeOptions(DEFAULT_OPTIONS, options);
 		this.state.flip = "+";
-		player.getChild('ControlBar').addChild('ZoomButton');
-		player.addChild('ZoomModal', { plugin: this, state: this.state });
+		if (this.state.showZoom || this.state.showMove || this.state.showRotate) {
+			player.getChild('ControlBar').addChild('ZoomButton');
+			player.addChild('ZoomModal', { plugin: this, state: this.state });
+		}
 		if (this.state.gestureHandler) {
 			player.addChild('ZoomGesture', { plugin: this, state: this.state });
 		}
