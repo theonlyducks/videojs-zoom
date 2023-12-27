@@ -18,7 +18,7 @@ const DEFAULT_OPTIONS = {
 	showZoom: true,
 	showMove: true,
 	showRotateFlip: true,
-	gestureZoomMove: false,
+	gestureHandler: false,
 };
 
 class ZoomPlugin extends Plugin {
@@ -36,7 +36,9 @@ class ZoomPlugin extends Plugin {
 		this.state.flip = "+";
 		player.getChild('ControlBar').addChild('ZoomButton');
 		player.addChild('ZoomModal', { plugin: this, state: this.state });
-		player.addChild('ZoomGesture', { plugin: this, state: this.state });
+		if (this.state.gestureHandler) {
+			player.addChild('ZoomGesture', { plugin: this, state: this.state });
+		}
 		this._observer = Observer.getInstance();
 		this._setTransform();
 	}

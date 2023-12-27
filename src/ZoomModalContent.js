@@ -60,12 +60,16 @@ export class ZoomModalContent {
 				</button>
 			</div>
 		`;
-
-		this.content = `
-			${this.state.showZoom ? zoom : ''}
-			${this.state.showMove ? move : ''}
-			${this.state.showRotateFlip ? rotateFlip : ''} 
-		`;
+		this.content = '';
+		if (this.state.showZoom) {
+			this.content += zoom;
+		}
+		if (this.state.showMove) {
+			this.content += move;
+		}
+		if (this.state.showRotateFlip) {
+			this.content += rotateFlip;
+		}
 	}
 
 }
