@@ -1,3 +1,14 @@
+# Release 1.3.0
+
+# Release 1.2.0 (July 24, 2023)
+
+## Implemented
+- Effect when closing modal
+- Close and open modal with control bar event
+
+### Bugs solved
+- Fixing dependency with vulnerability
+
 # Release 1.1.2 (January 27, 2023)
 
 ## Implemented

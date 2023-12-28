@@ -1,7 +1,8 @@
 export class ZoomModalContent {
 
-	constructor() {
+	constructor(options) {
 		this.content = null;
+		this.state = options.state;
 		this._createContent();
 	}
 
@@ -10,7 +11,7 @@ export class ZoomModalContent {
 	}
 
 	_createContent() {
-		this.content = `
+		const zoom = `
 			<div class="vjs-zoom-duck__container--row">
 				<button id="vjs-zoom-duck__zoomIn" class="vjs-zoom-duck__button">
 					<span class="vjs-zoom-icons">add</span>
@@ -20,6 +21,8 @@ export class ZoomModalContent {
 					<span class="vjs-zoom-icons">remove</span>
 				</button>
 			</div>
+		`;
+		const move = `
 			<div class="vjs-zoom-duck__container--row">
 				<span class="vjs-zoom-duck__space"></span>
 				<button id="vjs-zoom-duck__moveUp" class="vjs-zoom-duck__button">
@@ -45,6 +48,8 @@ export class ZoomModalContent {
 				</button>
 				<span class="vjs-zoom-duck__space"></span>
 			</div>
+		`;
+		const rotate = `
 			<div class="vjs-zoom-duck__container--row">
 				<button id="vjs-zoom-duck__rotate" class="vjs-zoom-duck__button">
 					<span class="vjs-zoom-icons">rotate_left</span>
@@ -55,6 +60,16 @@ export class ZoomModalContent {
 				</button>
 			</div>
 		`;
+		this.content = '';
+		if (this.state.showZoom) {
+			this.content += zoom;
+		}
+		if (this.state.showMove) {
+			this.content += move;
+		}
+		if (this.state.showRotate) {
+			this.content += rotate;
+		}
 	}
 
 }

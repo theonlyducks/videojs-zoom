@@ -20,7 +20,7 @@ export class ZoomModal extends Component {
 		const modal = videojs.dom.createEl("div", {
 			className: "vjs-zoom-duck__container",
 		});
-		const content = new ZoomModalContent();
+		const content = new ZoomModalContent(this.options_);
 		modal.innerHTML = content.getContent();
 		return modal;
 	}

@@ -1,8 +1,8 @@
 import videojs from "video.js";
 import packageJson from "../package.json";
 
-import { ZOOM_SALT } from "./ZoomFunction";
-import { ZoomModal } from "./ZoomModal";
+import { ZoomModal } from './ZoomModal';
+import { ZoomGesture } from './ZoomGesture';
 import { ZoomButton } from "./ZoomButton";
 import { Observer } from "./helpers/Observer";
 
@@ -15,6 +15,10 @@ const DEFAULT_OPTIONS = {
 	moveY: 0,
 	flip: "+",
 	rotate: 0,
+	showZoom: true,
+	showMove: true,
+	showRotate: true,
+	gestureHandler: false
 };
 
 class ZoomPlugin extends Plugin {
@@ -29,9 +33,13 @@ class ZoomPlugin extends Plugin {
 		this.player.style.overflow = "hidden";
 		this.state = videojs.obj.merge(DEFAULT_OPTIONS, [options]);
 		this.state.flip = "+";
-		this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
-		player.getChild("ControlBar").addChild("ZoomButton");
-		player.addChild("ZoomModal", { plugin: this, state: this.state });
+		if (this.state.showZoom || this.state.showMove || this.state.showRotate) {
+			player.getChild('ControlBar').addChild('ZoomButton');
+			player.addChild('ZoomModal', { plugin: this, state: this.state });
+		}
+		if (this.state.gestureHandler) {
+			player.addChild('ZoomGesture', { plugin: this, state: this.state });
+		}
 		this._observer = Observer.getInstance();
 		this._setTransform();
 	}
@@ -41,7 +49,6 @@ class ZoomPlugin extends Plugin {
 			throw new Error("Zoom value invalid");
 		}
 		this.state.zoom = value;
-		this.state.moveCount = Math.round((this.state.zoom - 1) / ZOOM_SALT);
 		this._setTransform();
 	}
 
@@ -91,8 +98,9 @@ ZoomPlugin.defaultState = {};
 
 ZoomPlugin.VERSION = VERSION;
 
-videojs.registerComponent("ZoomModal", ZoomModal);
-videojs.registerComponent("ZoomButton", ZoomButton);
-videojs.registerPlugin("zoomPlugin", ZoomPlugin);
+videojs.registerComponent('ZoomModal', ZoomModal);
+videojs.registerComponent('ZoomGesture', ZoomGesture);
+videojs.registerComponent('ZoomButton', ZoomButton);
+videojs.registerPlugin('zoomPlugin', ZoomPlugin);
 
 export default ZoomPlugin;
