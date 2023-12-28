@@ -4,7 +4,7 @@
 	font-weight: 400;
 	font-display: block;
 	src: url("./assets/material-icons.woff2") format("woff2"),
-	url("./assets/material-icons.woff") format("woff");
+		url("./assets/material-icons.woff") format("woff");
 }
 
 .video-js .vjs-zoom-icons {
@@ -26,14 +26,14 @@
 }
 
 .video-js .vjs-zoom-duck {
-	font-family: 'VideoJS', serif;
+	font-family: "VideoJS", serif;
 	cursor: pointer;
 	font-weight: 400;
 	font-style: normal;
 }
 
 .video-js .vjs-zoom-duck .vjs-icon-placeholder:before {
-	content: "\f110";
+	content: "\f114";
 }
 
 .video-js .vjs-zoom-duck__container {
@@ -43,8 +43,8 @@
 	visibility: hidden;
 	position: absolute;
 	opacity: 0;
-	background-color: rgba(43, 51, 63, .7);
-	transition: visibility .2s, opacity .2s;
+	background-color: rgba(43, 51, 63, 0.7);
+	transition: visibility 0.2s, opacity 0.2s;
 }
 
 .video-js .vjs-zoom-duck__container.open {
@@ -69,6 +69,6 @@
 }
 
 .video-js .vjs-zoom-duck__button:hover {
-	color: rgba(43, 51, 63, .7);
+	color: rgba(43, 51, 63, 0.7);
 	background-color: white;
 }
