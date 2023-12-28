@@ -32,7 +32,11 @@
 	font-style: normal;
 }
 
-.video-js .vjs-zoom-duck .vjs-icon-placeholder:before {
+.video-js .vjs-zoom-duck-7 .vjs-icon-placeholder:before {
+	content: "\f110";
+}
+
+.video-js .vjs-zoom-duck-8 .vjs-icon-placeholder:before {
 	content: "\f114";
 }
 

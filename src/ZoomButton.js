@@ -20,7 +20,8 @@ export class ZoomButton extends Button {
 	}
 
 	buildCSSClass() {
-		return `vjs-zoom-duck ${super.buildCSSClass()}`;
+		const [ major ] = videojs.VERSION.split('.');
+		return `vjs-zoom-duck vjs-zoom-duck-${major} ${super.buildCSSClass()}`;
 	}
 
 	handleClick() {
