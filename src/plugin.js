@@ -1,1 +1,1 @@
-import './ZoomPlugin';
+import "./ZoomPlugin";

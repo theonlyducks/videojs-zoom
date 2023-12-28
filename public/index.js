@@ -9,8 +9,8 @@ window.onload = () => {
 	const video = videojs('my-video');
 	const zoomPlugin = video.zoomPlugin({
 		showZoom: true,
-		showMove: false,
-		showRotate: false,
+		showMove: true,
+		showRotate: true,
 		gestureHandler: true
 	});
 	zoomPlugin.listen('click', () => {

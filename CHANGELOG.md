@@ -1,4 +1,10 @@
-# Release 1.3.0
+# Release 1.3.0 (December 28, 2023)
+
+## Implemented
+- Update video.js version to 8
+- Add zoom pinch gesture and mouse wheel
+- Add move swipe gesture and mouse drag and drop
+- Add title for buttons
 
 # Release 1.2.0 (July 24, 2023)
 

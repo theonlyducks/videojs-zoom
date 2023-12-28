@@ -1,8 +1,8 @@
 import videojs from "video.js";
 import packageJson from "../package.json";
 
-import { ZoomModal } from './ZoomModal';
-import { ZoomGesture } from './ZoomGesture';
+import { ZoomModal } from "./ZoomModal";
+import { ZoomGesture } from "./ZoomGesture";
 import { ZoomButton } from "./ZoomButton";
 import { Observer } from "./helpers/Observer";
 
@@ -22,8 +22,9 @@ const DEFAULT_OPTIONS = {
 };
 
 class ZoomPlugin extends Plugin {
+
 	constructor(player, options = {}) {
-		super(player, options);
+		super(player);
 		videojs.log("[~Zoom Plugin] start ", options);
 		this.player = player.el();
 		this.listeners = {
@@ -31,14 +32,14 @@ class ZoomPlugin extends Plugin {
 			change: () => {},
 		};
 		this.player.style.overflow = "hidden";
-		this.state = videojs.obj.merge(DEFAULT_OPTIONS, [options]);
+		this.state = Object.assign(DEFAULT_OPTIONS, options);
 		this.state.flip = "+";
 		if (this.state.showZoom || this.state.showMove || this.state.showRotate) {
-			player.getChild('ControlBar').addChild('ZoomButton');
-			player.addChild('ZoomModal', { plugin: this, state: this.state });
+			player.getChild("ControlBar").addChild("ZoomButton");
+			player.addChild("ZoomModal", { plugin: this, state: this.state });
 		}
 		if (this.state.gestureHandler) {
-			player.addChild('ZoomGesture', { plugin: this, state: this.state });
+			player.addChild("ZoomGesture", { plugin: this, state: this.state });
 		}
 		this._observer = Observer.getInstance();
 		this._setTransform();
@@ -84,7 +85,7 @@ class ZoomPlugin extends Plugin {
 	}
 
 	_setTransform() {
-		const [video] = this.player.getElementsByTagName("video");
+		const [ video ] = this.player.getElementsByTagName("video");
 		video.style.transform = `
 			translate(${this.state.moveX}px, ${this.state.moveY}px) 
 			scale(${this.state.flip}${this.state.zoom}, ${this.state.zoom}) 
@@ -92,15 +93,18 @@ class ZoomPlugin extends Plugin {
 		`;
 		this._notify();
 	}
+
+	handleStateChanged(event) { }
+
 }
 
 ZoomPlugin.defaultState = {};
 
 ZoomPlugin.VERSION = VERSION;
 
-videojs.registerComponent('ZoomModal', ZoomModal);
-videojs.registerComponent('ZoomGesture', ZoomGesture);
-videojs.registerComponent('ZoomButton', ZoomButton);
-videojs.registerPlugin('zoomPlugin', ZoomPlugin);
+videojs.registerComponent("ZoomModal", ZoomModal);
+videojs.registerComponent("ZoomGesture", ZoomGesture);
+videojs.registerComponent("ZoomButton", ZoomButton);
+videojs.registerPlugin("zoomPlugin", ZoomPlugin);
 
 export default ZoomPlugin;

@@ -6,6 +6,7 @@ import { ZoomModalContent } from "./ZoomModalContent";
 const Component = videojs.getComponent("Component");
 
 export class ZoomModal extends Component {
+
 	constructor(player, options) {
 		super(player, options);
 		this.player = player.el();
@@ -30,7 +31,7 @@ export class ZoomModal extends Component {
 			"vjs-zoom-duck__button"
 		);
 		buttons = Array.from(buttons);
-		buttons.map((button) => {
+		buttons.map(button => {
 			const [, action] = button.id.split("__");
 			button.onclick = () => this.function[action]();
 			button.title = action.charAt(0).toUpperCase() + action.slice(1);
@@ -38,7 +39,7 @@ export class ZoomModal extends Component {
 	}
 
 	toggle() {
-		const [modal] = this.player.getElementsByClassName(
+		const [ modal ] = this.player.getElementsByClassName(
 			"vjs-zoom-duck__container"
 		);
 		modal.classList.toggle("open");
@@ -46,7 +47,7 @@ export class ZoomModal extends Component {
 	}
 
 	open() {
-		const [modal] = this.player.getElementsByClassName(
+		const [ modal ] = this.player.getElementsByClassName(
 			"vjs-zoom-duck__container"
 		);
 		modal.classList.add("open");
@@ -54,10 +55,11 @@ export class ZoomModal extends Component {
 	}
 
 	close() {
-		const [modal] = this.player.getElementsByClassName(
+		const [ modal ] = this.player.getElementsByClassName(
 			"vjs-zoom-duck__container"
 		);
 		modal.classList.remove("open");
 		this.plugin.listeners.click();
 	}
+
 }

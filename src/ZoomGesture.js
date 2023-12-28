@@ -1,8 +1,8 @@
-import videojs from 'video.js';
+import videojs from "video.js";
 
-import { ZoomFunction } from './ZoomFunction';
+import { ZoomFunction } from "./ZoomFunction";
 
-const Component = videojs.getComponent('Component');
+const Component = videojs.getComponent("Component");
 
 export class ZoomGesture extends Component {
 
@@ -12,20 +12,20 @@ export class ZoomGesture extends Component {
 		this.player = player.el();
 		this.state = options.state;
 		this.function = new ZoomFunction(player, options);
-		player.on('playing', () => {
+		player.on("playing", () => {
 			this.gesture();
 		});
 	}
 
 	gesture() {
-		this.player.addEventListener('pointerdown', event => {
+		this.player.addEventListener("pointerdown", event => {
 			this.pointers[event.pointerId] = event;
 		});
-		this.player.addEventListener('pointerup', event => {
+		this.player.addEventListener("pointerup", event => {
 			delete this.pointers[event.pointerId];
 		});
 		// let pinch;
-		this.player.addEventListener('pointermove', event => {
+		this.player.addEventListener("pointermove", event => {
 			if (!Object.keys(this.pointers).length) return;
 			const pointer = this.pointers[event.pointerId];
 			const moveX = event.clientX - pointer.clientX;
@@ -51,7 +51,7 @@ export class ZoomGesture extends Component {
 			this.function.moveY(moveX);
 			this.function.moveX(moveY);
 		});
-		this.player.addEventListener('wheel', event => {
+		this.player.addEventListener("wheel", event => {
 			this.function.zoomHandler(-1e-2 * event.deltaY);
 			this.function.moveY(0);
 			this.function.moveX(0);
