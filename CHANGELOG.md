@@ -2,9 +2,10 @@
 
 ## Implemented
 - Update video.js version to 8
-- Add zoom pinch gesture and mouse wheel
-- Add move swipe gesture and mouse drag and drop
-- Add title for buttons
+- Add customizing the action modal
+- Add zoom gesture and mouse wheel
+- Add move gesture and mouse drag and drop
+- Add title for buttons in action modal
 
 # Release 1.2.0 (July 24, 2023)
 
