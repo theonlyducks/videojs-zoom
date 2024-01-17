@@ -12,7 +12,7 @@ export class ZoomGesture extends Component {
 		this.player = player.el();
 		this.state = options.state;
 		this.function = new ZoomFunction(player, options);
-		player.on("playing", () => {
+		player.on("loadstart", () => {
 			this.gesture();
 		});
 	}
@@ -20,6 +20,7 @@ export class ZoomGesture extends Component {
 	gesture() {
 		this.player.addEventListener("pointerdown", event => {
 			this.pointers[event.pointerId] = event;
+
 		});
 		this.player.addEventListener("pointerup", event => {
 			delete this.pointers[event.pointerId];

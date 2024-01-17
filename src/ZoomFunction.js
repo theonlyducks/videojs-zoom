@@ -8,9 +8,12 @@ export class ZoomFunction {
 		this.player = player.el();
 		this.plugin = options.plugin;
 		this.observer = Observer.getInstance();
-		player.on("playing", () => {
+		player.on("loadeddata", () => {
 			this._updateSalt();
 		});
+		player.on("playerresize", () => {
+			this._updateSalt();
+		})
 		this.observer.subscribe("change", state => {
 			this.state = { ...state, saltMoveX: 70, saltMoveY: 70 };
 			this._updateSalt();
@@ -30,18 +33,17 @@ export class ZoomFunction {
 
 	zoomIn() {
 		const zoom = Math.max(1, Math.min(9.8, this.state.zoom + ZOOM_SALT));
-		this._zoom(zoom);
+		this._zoom(Number(zoom.toFixed(1)));
 	}
 
 	zoomOut() {
 		this.plugin.move(0, 0);
 		const zoom = Math.max(1, this.state.zoom - ZOOM_SALT);
-		this._zoom(zoom);
+		this._zoom(Number(zoom.toFixed(1)));
 	}
 
 	zoomHandler(salt) {
-		const zoom = Math.max(1, Math.min(9.8, this.state.zoom + salt));
-		this._zoom(zoom);
+		Math.sign(salt) === 1 ? this.zoomIn() : this.zoomOut();
 	}
 
 	_move() {
@@ -49,40 +51,48 @@ export class ZoomFunction {
 		this.plugin.listeners.change(this.state);
 	}
 
-	moveX(salt) {
-		const available = this.player.offsetHeight * this.getMoveCount();
-		this.state.moveY = Math.max(-available, Math.min(available, this.state.moveY + salt));
-		this._move();
-	}
-
 	moveUp() {
-		const available = this.player.offsetHeight * this.getMoveCount();
+		const available = this._getMoveYAvailable();
 		this.state.moveY = Math.max(-available, Math.min(available, this.state.moveY + this.state.saltMoveY));
 		this._move();
 	}
 
 	moveDown() {
-		const available = this.player.offsetHeight * this.getMoveCount();
-		this.state.moveY = Math.max(-available, this.state.moveY - this.state.saltMoveY);
+		const available = this._getMoveYAvailable();
+		this.state.moveY = Math.max(-available, Math.min(available, this.state.moveY - this.state.saltMoveY));
 		this._move();
 	}
 
-	moveY(salt) {
-		const available = this.player.offsetHeight * this.getMoveCount();
-		this.state.moveX = Math.max(-available, Math.min(available, this.state.moveX + salt));
+	moveX(salt) {
+		const available = this._getMoveYAvailable();
+		this.state.moveY = Math.max(-available, Math.min(available, this.state.moveY + salt));
 		this._move();
+	}
+
+	_getMoveYAvailable() {
+		return this.state.saltMoveY * ((this.state.zoom - 1) / ZOOM_SALT);
 	}
 
 	moveLeft() {
-		const available = this.player.offsetHeight * this.getMoveCount();
+		const available = this._getMoveXAvailable();
 		this.state.moveX = Math.max(-available, Math.min(available, this.state.moveX + this.state.saltMoveX));
 		this._move();
 	}
 
 	moveRight() {
-		const available = this.player.offsetHeight * this.getMoveCount();
+		const available = this._getMoveXAvailable();
 		this.state.moveX = Math.max(-available, this.state.moveX - this.state.saltMoveX);
 		this._move();
+	}
+
+	moveY(salt) {
+		const available = this._getMoveXAvailable();
+		this.state.moveX = Math.max(-available, Math.min(available, this.state.moveX + salt));
+		this._move();
+	}
+
+	_getMoveXAvailable() {
+		return this.state.saltMoveX * ((this.state.zoom - 1) / ZOOM_SALT);
 	}
 
 	_rotate() {
@@ -118,10 +128,5 @@ export class ZoomFunction {
 		this.plugin.rotate(0);
 		this.plugin.move(0, 0);
 		this.plugin.listeners.change(this.state);
-	}
-
-	getMoveCount() {
-		const { zoom } = this.state;
-		return zoom / 2 * ( 1 - ( 1 / zoom ));
 	}
 }
