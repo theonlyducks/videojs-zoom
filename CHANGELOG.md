@@ -1,3 +1,9 @@
+# Release 1.3.1 (January 22, 2024)
+
+### Bugs solved
+- Problem moving when zoomed in
+- Problem with multiples listeners in gesture handler
+
 # Release 1.3.0 (December 28, 2023)
 
 ## Implemented
