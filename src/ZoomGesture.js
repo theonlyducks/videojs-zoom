@@ -1,6 +1,7 @@
 import videojs from "video.js";
 
 import { ZoomFunction } from "./ZoomFunction";
+import { Observer } from "./helpers/Observer";
 
 const Component = videojs.getComponent("Component");
 
@@ -8,6 +9,8 @@ export class ZoomGesture extends Component {
 
 	constructor(player, options) {
 		super(player, options);
+		this._enabled = false;
+		this._observer = Observer.getInstance();
 		this.pointers = {};
 		this.player = player.el();
 		this.state = options.state;
@@ -15,18 +18,21 @@ export class ZoomGesture extends Component {
 		player.on("loadstart", () => {
 			this.gesture();
 		});
+		this._observer.subscribe('plugin', state => {
+			this._enabled = state.enabled;
+		});
 	}
 
 	gesture() {
 		this.player.addEventListener("pointerdown", event => {
 			this.pointers[event.pointerId] = event;
-
 		});
 		this.player.addEventListener("pointerup", event => {
 			delete this.pointers[event.pointerId];
 		});
 		// let pinch;
 		this.player.addEventListener("pointermove", event => {
+			if (!this._enabled) return;
 			if (!Object.keys(this.pointers).length) return;
 			const pointer = this.pointers[event.pointerId];
 			const moveX = event.clientX - pointer.clientX;
@@ -53,9 +59,12 @@ export class ZoomGesture extends Component {
 			this.function.moveX(moveY);
 		});
 		this.player.addEventListener("wheel", event => {
+			if (!this._enabled) return;
 			this.function.zoomHandler(-1e-2 * event.deltaY);
 			this.function.moveY(0);
 			this.function.moveX(0);
+		}, {
+			passive: true
 		});
 	}
 

@@ -20,34 +20,36 @@
 
 ## Documentation
 
-See
-
 ## Getting started
 
-### Requirements
+### Requirements 
 
-```shell
-yarn add video.js
-```
+- With browser [Video.js](https://videojs.com/getting-started)
+- With npm `npm istall video.js`
+- With yarn `yarn add video.js`
 
 ### Installation
 
-```shell
-npm install @theonlyducks/videojs-zoom@latest
-```
-or
-```shell
-yarn add @theonlyducks/videojs-zoom@latest
-```
+- With browser [Download](https://github.com/theonlyducks/videojs-zoom/releases/download/v1.3.4/dist.zip)
+- With npm `npm install @theonlyducks/videojs-zoom@latest`
+- With yarn `yarn add @theonlyducks/videojs-zoom@latest`
 
 ### Usage
 
+- With Browser
+
+```html
+<link rel="stylesheet" type="text/css" href="/dist/videojs-zoom.css">
+<script src="/dist/videojs-zoom.js"></script>
+```
+
+- With Node
 ```js
 import '@theonlyducks/videojs-zoom/styles';
 import '@theonlyducks/videojs-zoom';
 ```
 
-#### Example
+### Example
 
 ```js
 const video = videojs('my-video');
@@ -116,6 +118,24 @@ Flip video image
 ```js
 const zoomPlugin = video.zoomPlugin();
 zoomPlugin.flip("-");
+```
+
+### enablePlugin(): void
+
+Enable the plugin if it is disabled
+
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.enablePlugin();
+```
+
+### disablePlugin(): void
+
+Disables all visual features of the plugin if enabled
+
+```js
+const zoomPlugin = video.zoomPlugin();
+zoomPlugin.disablePlugin();
 ```
 
 ## Options

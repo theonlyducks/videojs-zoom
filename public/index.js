@@ -19,6 +19,14 @@ window.onload = () => {
 	zoomPlugin.listen('change', data => {
 		console.log('onchange', data);
 	});
+	const enable = document.getElementById('my-enable');
+	enable.onclick = () => {
+		zoomPlugin.enablePlugin();
+	};
+	const disable = document.getElementById('my-disable');
+	disable.onclick = () => {
+		zoomPlugin.disablePlugin();
+	};
 	const open = document.getElementById('my-open');
 	open.onclick = () => {
 		zoomPlugin.toggle();

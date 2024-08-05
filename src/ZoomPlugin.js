@@ -26,22 +26,25 @@ class ZoomPlugin extends Plugin {
 	constructor(player, options = {}) {
 		super(player);
 		videojs.log("[~Zoom Plugin] start ", options);
-		this.player = player.el();
+		this._enabled = true;
+		this.player = player;
+		this.playerEl = player.el();
 		this.listeners = {
 			click: () => {},
 			change: () => {},
 		};
-		this.player.style.overflow = "hidden";
+		this.playerEl.style.overflow = "hidden";
 		this.state = Object.assign(DEFAULT_OPTIONS, options);
 		this.state.flip = "+";
 		if (this.state.showZoom || this.state.showMove || this.state.showRotate) {
-			player.getChild("ControlBar").addChild("ZoomButton");
-			player.addChild("ZoomModal", { plugin: this, state: this.state });
+			this.player.getChild("ControlBar").addChild("ZoomButton");
+			this.player.addChild("ZoomModal", { plugin: this, state: this.state });
 		}
 		if (this.state.gestureHandler) {
-			player.addChild("ZoomGesture", { plugin: this, state: this.state });
+			this.player.addChild("ZoomGesture", { plugin: this, state: this.state });
 		}
 		this._observer = Observer.getInstance();
+		this._observer.notify("plugin", { enabled: this._enabled });
 		this._setTransform();
 	}
 
@@ -70,7 +73,7 @@ class ZoomPlugin extends Plugin {
 	}
 
 	toggle() {
-		const [modal] = this.player.getElementsByClassName(
+		const [modal] = this.playerEl.getElementsByClassName(
 			"vjs-zoom-duck__container"
 		);
 		modal.classList.toggle("open");
@@ -80,18 +83,38 @@ class ZoomPlugin extends Plugin {
 		this.listeners[listener] = callback;
 	}
 
-	_notify() {
-		this._observer.notify("change", this.state);
-	}
-
 	_setTransform() {
-		const [ video ] = this.player.getElementsByTagName("video");
+		const [ video ] = this.playerEl.getElementsByTagName("video");
 		video.style.transform = `
 			translate(${this.state.moveX}px, ${this.state.moveY}px) 
 			scale(${this.state.flip}${this.state.zoom}, ${this.state.zoom}) 
 			rotate(${this.state.rotate}deg)
 		`;
 		this._notify();
+	}
+
+	_notify() {
+		this._observer.notify("change", this.state);
+	}
+
+	enablePlugin() {
+		if (this._enabled) return;
+		this._enabled = !this._enabled;
+		this.player.getChild("ControlBar").addChild("ZoomButton");
+		const observer = Observer.getInstance();
+		observer.notify("plugin", { enabled: this._enabled });
+	}
+
+	disablePlugin() {
+		if (!this._enabled) return;
+		this._enabled = !this._enabled;
+		this.player.getChild("ControlBar").removeChild("ZoomButton");
+		const [modal] = this.playerEl.getElementsByClassName(
+			"vjs-zoom-duck__container"
+		);
+		modal.classList.remove("open");
+		const observer = Observer.getInstance();
+		observer.notify("plugin", { enabled: this._enabled });
 	}
 
 	handleStateChanged(event) { }

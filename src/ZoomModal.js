@@ -2,6 +2,7 @@ import videojs from "video.js";
 
 import { ZoomFunction } from "./ZoomFunction";
 import { ZoomModalContent } from "./ZoomModalContent";
+import { Observer } from "./helpers/Observer";
 
 const Component = videojs.getComponent("Component");
 
@@ -9,11 +10,16 @@ export class ZoomModal extends Component {
 
 	constructor(player, options) {
 		super(player, options);
+		this._enabled = false;
+		this._observer = Observer.getInstance();
 		this.player = player.el();
 		this.plugin = options.plugin;
 		this.function = new ZoomFunction(player, options);
 		player.on("playing", () => {
 			this.listeners();
+		});
+		this._observer.subscribe('plugin', state => {
+			this._enabled = state.enabled;
 		});
 	}
 
@@ -39,6 +45,7 @@ export class ZoomModal extends Component {
 	}
 
 	toggle() {
+		if (!this._enabled) return;
 		const [ modal ] = this.player.getElementsByClassName(
 			"vjs-zoom-duck__container"
 		);
@@ -47,6 +54,7 @@ export class ZoomModal extends Component {
 	}
 
 	open() {
+		if (!this._enabled) return;
 		const [ modal ] = this.player.getElementsByClassName(
 			"vjs-zoom-duck__container"
 		);
@@ -55,6 +63,7 @@ export class ZoomModal extends Component {
 	}
 
 	close() {
+		if (!this._enabled) return;
 		const [ modal ] = this.player.getElementsByClassName(
 			"vjs-zoom-duck__container"
 		);

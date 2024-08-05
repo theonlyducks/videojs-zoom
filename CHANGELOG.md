@@ -1,3 +1,10 @@
+# Release 1.3.4 (August 05, 2024)
+
+## Implemented
+- Non-node version available
+- Add enable/disable plugin action
+- Add support for video.js ˆ8
+
 # Release 1.3.1 (January 22, 2024)
 
 ### Bugs solved
