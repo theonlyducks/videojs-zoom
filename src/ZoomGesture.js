@@ -29,11 +29,13 @@ export class ZoomGesture extends Component {
 		});
 		this.player.addEventListener("pointerup", event => {
 			delete this.pointers[event.pointerId];
+			this.player.firstChild.style.pointerEvents = "";
 		});
 		// let pinch;
 		this.player.addEventListener("pointermove", event => {
 			if (!this._enabled) return;
 			if (!Object.keys(this.pointers).length) return;
+			this.player.firstChild.style.pointerEvents = "none";
 			const pointer = this.pointers[event.pointerId];
 			const moveX = event.clientX - pointer.clientX;
 			const moveY = event.clientY - pointer.clientY;
