@@ -31,7 +31,9 @@ export class ZoomGesture extends Component {
 			delete this.pointers[event.pointerId];
 			this.player.firstChild.style.pointerEvents = "";
 		});
-		// let pinch;
+		this.player.addEventListener("pointerleave", event => {
+			delete this.pointers[event.pointerId];
+		});
 		this.player.addEventListener("pointermove", event => {
 			if (!this._enabled) return;
 			if (!Object.keys(this.pointers).length) return;
@@ -40,33 +42,15 @@ export class ZoomGesture extends Component {
 			const moveX = event.clientX - pointer.clientX;
 			const moveY = event.clientY - pointer.clientY;
 			this.pointers[event.pointerId] = event;
-			// let moveZ = 0;
-			// const fingers = Object.values(this.pointers);
-			// if (fingers.length < 2) {
-			// 	console.log('a')
-			// 	pinch = void 0;
-			// } else if (!pinch) {
-			// 	console.log('b')
-			// 	const [ t, i ] = fingers;
-			// 	pinch = Math.abs(t.clientX - i.clientX);
-			// } else {
-			// 	console.log('c')
-			// 	const [ t, i ] = fingers;
-			// 	const p = Math.abs(t.clientX - i.clientX);
-			// 	moveZ = 1e-2 * (p - pinch);
-			// 	pinch = p;
-			// }
-			// this.function.zoomHandler(moveZ);
 			this.function.moveY(moveX);
 			this.function.moveX(moveY);
 		});
 		this.player.addEventListener("wheel", event => {
+			event.stopPropagation();
 			if (!this._enabled) return;
 			this.function.zoomHandler(-1e-2 * event.deltaY);
 			this.function.moveY(0);
 			this.function.moveX(0);
-		}, {
-			passive: true
 		});
 	}
 

@@ -1,3 +1,10 @@
+# Release 1.3.5 (January 08, 2025)
+
+## Bugs solved
+- Pause video when moving
+- Zoom with scroll event in drag
+- Zoom out without centering o player in controls
+
 # Release 1.3.4 (August 05, 2024)
 
 ## Implemented
@@ -7,7 +14,7 @@
 
 # Release 1.3.1 (January 22, 2024)
 
-### Bugs solved
+## Bugs solved
 - Problem moving when zoomed in
 - Problem with multiples listeners in gesture handler
 
@@ -26,7 +33,7 @@
 - Effect when closing modal
 - Close and open modal with control bar event
 
-### Bugs solved
+## Bugs solved
 - Fixing dependency with vulnerability
 
 # Release 1.1.2 (January 27, 2023)
