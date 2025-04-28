@@ -46,6 +46,7 @@ export class ZoomGesture extends Component {
 			this.function.moveX(moveY);
 		});
 		this.player.addEventListener("wheel", event => {
+			event.preventDefault();
 			event.stopPropagation();
 			if (!this._enabled) return;
 			this.function.zoomHandler(-1e-2 * event.deltaY);
