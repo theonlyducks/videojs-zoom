@@ -1,3 +1,9 @@
+# Release 1.3.6 (May 12, 2025)
+
+## Bugs solved
+- Change problems with zoom and drag
+- Removed propagation of wheel listener for zoom
+
 # Release 1.3.5 (January 08, 2025)
 
 ## Bugs solved
