@@ -102,7 +102,7 @@ export class ZoomFunction {
 	}
 
 	rotate() {
-		this.state.rotate -= 180;
+		this.state.rotate -= 90;
 		if (this.state.rotate === -360) {
 			this.state.rotate = 0
 		}
