@@ -39,8 +39,10 @@ export class ZoomModal extends Component {
 		buttons = Array.from(buttons);
 		buttons.map(button => {
 			const [, action] = button.id.split("__");
-			button.onclick = () => this.function[action]();
-			button.title = action.charAt(0).toUpperCase() + action.slice(1);
+			const functionName = action === "resetStandalone" ? "reset" : action;
+			button.onclick = () => this.function[functionName]();
+			const displayName = action === "resetStandalone" ? "Reset" : action.charAt(0).toUpperCase() + action.slice(1);
+			button.title = displayName;
 		});
 	}
 

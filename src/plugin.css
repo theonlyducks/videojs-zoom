@@ -76,3 +76,24 @@
 	color: rgba(43, 51, 63, 0.7);
 	background-color: white;
 }
+
+.video-js .vjs-zoom-duck__reset-standalone {
+	width: auto;
+	height: auto;
+	padding: 5px 12px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.video-js .vjs-zoom-duck__button-text {
+	margin-left: 5px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+}
+
+.video-js .vjs-zoom-duck__reset-standalone:hover {
+	background-color: rgba(255, 255, 255, 0.8);
+}

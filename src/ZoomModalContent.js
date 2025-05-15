@@ -49,6 +49,13 @@ export class ZoomModalContent {
 				<span class="vjs-zoom-duck__space"></span>
 			</div>
 		`;
+		const reset = `
+			<div class="vjs-zoom-duck__container--row">
+				<button id="vjs-zoom-duck__resetStandalone" class="vjs-zoom-duck__button vjs-zoom-duck__reset-standalone">
+					<span class="vjs-zoom-icons">autorenew</span>
+				</button>
+			</div>
+		`;
 		const rotate = `
 			<div class="vjs-zoom-duck__container--row">
 				<button id="vjs-zoom-duck__rotate" class="vjs-zoom-duck__button">
@@ -69,6 +76,9 @@ export class ZoomModalContent {
 		}
 		if (this.state.showRotate) {
 			this.content += rotate;
+		}
+		if (this.state.showReset) {
+			this.content += reset;
 		}
 	}
 
