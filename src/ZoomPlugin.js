@@ -18,6 +18,7 @@ const DEFAULT_OPTIONS = {
 	showZoom: true,
 	showMove: true,
 	showRotate: true,
+	showFlip: true,
 	gestureHandler: false
 };
 
