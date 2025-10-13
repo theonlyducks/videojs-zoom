@@ -54,7 +54,10 @@ export class ZoomModalContent {
 				<button id="vjs-zoom-duck__rotate" class="vjs-zoom-duck__button">
 					<span class="vjs-zoom-icons">rotate_left</span>
 				</button>
-				<span class="vjs-zoom-duck__space"></span>
+			</div>
+		`;
+		const flip = `
+			<div class="vjs-zoom-duck__container--row">
 				<button id="vjs-zoom-duck__flip" class="vjs-zoom-duck__button">
 					<span class="vjs-zoom-icons">swap_horiz</span>
 				</button>
@@ -69,6 +72,9 @@ export class ZoomModalContent {
 		}
 		if (this.state.showRotate) {
 			this.content += rotate;
+		}
+		if (this.state.showFlip) {
+			this.content += flip;
 		}
 	}
 

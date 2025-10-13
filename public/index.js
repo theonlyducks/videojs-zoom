@@ -11,6 +11,7 @@ window.onload = () => {
 		showZoom: true,
 		showMove: true,
 		showRotate: true,
+		showFlip: true,
 		gestureHandler: true
 	});
 	zoomPlugin.listen('click', () => {
